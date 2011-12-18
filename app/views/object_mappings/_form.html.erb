@@ -1,0 +1,37 @@
+<%= form_for(@object_mapping) do |f| %>
+  <% if @object_mapping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@object_mapping.errors.count, "error") %> prohibited this object_mapping from being saved:</h2>
+
+      <ul>
+      <% @object_mapping.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :child_id %><br />
+    <%= f.number_field :child_id %>
+  </div>
+  <div class="field">
+    <%= f.label :child_type %><br />
+    <%= f.text_field :child_type %>
+  </div>
+  <div class="field">
+    <%= f.label :parent_id %><br />
+    <%= f.number_field :parent_id %>
+  </div>
+  <div class="field">
+    <%= f.label :parent_type %><br />
+    <%= f.text_field :parent_type %>
+  </div>
+  <div class="field">
+    <%= f.label :task_run_id %><br />
+    <%= f.number_field :task_run_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

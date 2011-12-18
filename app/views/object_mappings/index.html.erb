@@ -1,0 +1,31 @@
+<h1>Listing object_mappings</h1>
+
+<table>
+  <tr>
+    <th>Child</th>
+    <th>Child type</th>
+    <th>Parent</th>
+    <th>Parent type</th>
+    <th>Task run</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @object_mappings.each do |object_mapping| %>
+  <tr>
+    <td><%= object_mapping.child_id %></td>
+    <td><%= object_mapping.child_type %></td>
+    <td><%= object_mapping.parent_id %></td>
+    <td><%= object_mapping.parent_type %></td>
+    <td><%= object_mapping.task_run_id %></td>
+    <td><%= link_to 'Show', object_mapping %></td>
+    <td><%= link_to 'Edit', edit_object_mapping_path(object_mapping) %></td>
+    <td><%= link_to 'Destroy', object_mapping, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Object mapping', new_object_mapping_path %>

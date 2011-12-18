@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  child_id: 1
+  child_type: MyString
+  parent_id: 1
+  parent_type: MyString
+  task_run_id: 1
+
+two:
+  child_id: 1
+  child_type: MyString
+  parent_id: 1
+  parent_type: MyString
+  task_run_id: 1

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @task_run.name %>
+</p>
+
+<p>
+  <b>Task object:</b>
+  <%= @task_run.task_object_id %>
+</p>
+
+<p>
+  <b>Task object type:</b>
+  <%= @task_run.task_object_type %>
+</p>
+
+<p>
+  <b>Task options hash:</b>
+  <%= @task_run.task_options_hash %>
+</p>
+
+
+<%= link_to 'Edit', edit_task_run_path(@task_run) %> |
+<%= link_to 'Back', task_runs_path %>

@@ -16,7 +16,7 @@ module Ear
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/lib/ear)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -44,5 +44,17 @@ module Ear
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+		# EAR specific configuration
+		############################			
+		#@root = Rails.root
+
+		# Set up task manager
+		#@task_manager = Ear::TaskManager.instance
+		#@task_manager.setup("#{@root}/lib/ear/tasks")
+		
+		# Set up the object manager
+		#@object_manager = Ear::ObjectManager.instance
+
   end
 end

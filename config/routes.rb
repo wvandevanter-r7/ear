@@ -1,4 +1,11 @@
 Ear::Application.routes.draw do
+  resources :domains
+  resources :hosts
+  resources :task_runs
+  resources :object_mappings
+  resources :users
+  resources :organizations
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

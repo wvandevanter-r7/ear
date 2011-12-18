@@ -1,12 +1,26 @@
 source 'http://rubygems.org'
 
+# Require recent Rails:
 gem 'rails', '3.1.2'
-
-# Bundle edge Rails instead:
+# Use edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'therubyracer'
 
+# EAR Data manipulation
+gem 'fastercsv'
+gem 'rex'
+gem 'nmap-parser'
+gem 'nokogiri'
+
+# EAR Data lookup:
+gem 'geoip'
+gem 'whois'
+gem 'pcaprub'
+gem 'packetfu'
+gem 'flickr'
+gem 'exifr'
 
 # Gems used only for assets and not required
 # in production environments by default.

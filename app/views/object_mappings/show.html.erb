@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Child:</b>
+  <%= @object_mapping.child_id %>
+</p>
+
+<p>
+  <b>Child type:</b>
+  <%= @object_mapping.child_type %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <%= @object_mapping.parent_id %>
+</p>
+
+<p>
+  <b>Parent type:</b>
+  <%= @object_mapping.parent_type %>
+</p>
+
+<p>
+  <b>Task run:</b>
+  <%= @object_mapping.task_run_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_object_mapping_path(@object_mapping) %> |
+<%= link_to 'Back', object_mappings_path %>

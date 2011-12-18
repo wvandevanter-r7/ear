@@ -1,0 +1,29 @@
+<h1>Listing task_runs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Task object</th>
+    <th>Task object type</th>
+    <th>Task options hash</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @task_runs.each do |task_run| %>
+  <tr>
+    <td><%= task_run.name %></td>
+    <td><%= task_run.task_object_id %></td>
+    <td><%= task_run.task_object_type %></td>
+    <td><%= task_run.task_options_hash %></td>
+    <td><%= link_to 'Show', task_run %></td>
+    <td><%= link_to 'Edit', edit_task_run_path(task_run) %></td>
+    <td><%= link_to 'Destroy', task_run, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Task run', new_task_run_path %>
