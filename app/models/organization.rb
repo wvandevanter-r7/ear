@@ -3,6 +3,8 @@ class Organization < ActiveRecord::Base
 	has_many :users
 	has_many :hosts	
 	
+	serialize :sources
+
 	validates_uniqueness_of :name
   validates_presence_of :name
 

@@ -9,8 +9,8 @@ class ObjectManager
 	#
 	def find_children(id, type)
 		all_mapped_children = ObjectMapping.all(
-					      :conditions => {  :parent_id => id,
-							                    :parent_type => type})
+					:conditions => {	:parent_id => id,
+														:parent_type => type})
 		children = []
 		if all_mapped_children.kind_of? ObjectMapping
 			children << all_mapped_children
@@ -27,7 +27,7 @@ class ObjectManager
 	#
 	def find_parents(id, type)
 		all_mapped_parents = ObjectMapping.all(
-					:conditions => {  :child_id => id,
+					:conditions => {	:child_id => id,
 														:child_type => type})
 		parents = []
 		if all_mapped_parents.kind_of? ObjectMapping

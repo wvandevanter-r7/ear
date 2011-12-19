@@ -1,17 +1,19 @@
 # Simple logger class
 class TaskLogger
 
+	attr_accessor :name
+
 	def initialize(name)
 		@name = name
 	end
 
 	def log(message)
-		puts "[x] #{@name}: " << message	
+		puts "[_] #{@name}: " << message	
 	end
 
 	######
 	def log_debug(message) 
-		puts "[d] #{@name}: " << message
+		puts "[D] #{@name}: " << message
 	end
 
 	def log_good(message)

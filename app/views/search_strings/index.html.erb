@@ -1,0 +1,23 @@
+<h1>Listing search_strings</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @search_strings.each do |search_string| %>
+  <tr>
+    <td><%= search_string.name %></td>
+    <td><%= link_to 'Show', search_string %></td>
+    <td><%= link_to 'Edit', edit_search_string_path(search_string) %></td>
+    <td><%= link_to 'Destroy', search_string, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Search string', new_search_string_path %>

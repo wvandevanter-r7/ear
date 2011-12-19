@@ -3,24 +3,31 @@ module ModelHelper
 	def self.included(base)
     base.class_eval do
 
+			def to_s
+				"#{self.class}: #{name}"
+			end
+			
 			#
 			# This method lets you query the available tasks for this object type
 			#
 			def tasks
+				EarLogger.instance.log "Getting tasks for #{self}"
 				TaskManager.instance.get_tasks_for(self)
 			end
 
 			#
 			# This method lets you run a task on this object
 			#
-			def run_task(task)
-				TaskManager.instance.run_task(task,self)
+			def run_task(task_name, options={})
+				EarLogger.instance.log "Asking task manager to queue task #{task_name} run on #{self} with options: #{options}"
+				TaskManager.instance.queue_task_run(task_name, self, options)
 			end
 
 			#
 			# This method lets you find all available children
 			#
 			def children
+				EarLogger.instance.log "Finding children for #{self}"
 				ObjectManager.instance.find_children(self.id, self.class.to_s)
 			end
 
@@ -28,6 +35,7 @@ module ModelHelper
 			# This method lets you find all available parents
 			#
 			def parents
+				EarLogger.instance.log "Finding parents for #{self}"
 				ObjectManager.instance.find_parents(self.id, self.class.to_s)
 			end
 			
@@ -35,11 +43,9 @@ module ModelHelper
 			# This method associates a child with this object
 			#
 			def associate_child(params)
+				# Pull out the relevant parameters
 				new_object = params[:child]
-				
 				task_run = params[:task_run]
-
-				EarLogger.instance.log_good "Associating #{self} with child object #{new_object}"
 
 			  # grab the object's class
 			  class_name = new_object.class.to_s.downcase
@@ -67,6 +73,7 @@ module ModelHelper
 				# And set us up as a parent through an object_mapping
 				# new_object._map_parent(params)  
 			 	# And associate the object as a child through an object_mapping
+				EarLogger.instance.log "Associating #{self} with child object #{new_object}"
 				_map_child(params)
 		  end
 			
@@ -96,13 +103,17 @@ module ModelHelper
 			end
 =end	
 			def _map_child(params)
-				EarLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"
-				ObjectMapping.create(
-					:parent_id => self.id,
-					:parent_type => self.class.to_s,
-					:child_id => params[:child].id,
-					:child_type => params[:child].class.to_s,
-					:task_run_id => params[:task_run].id || nil)			
+				begin
+					EarLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"
+					ObjectMapping.create(
+						:parent_id => self.id,
+						:parent_type => self.class.to_s,
+						:child_id => params[:child].id,
+						:child_type => params[:child].class.to_s,
+						:task_run_id => params[:task_run].id || nil)			
+				rescue
+					EarLogger.instance.log_error "Could not create mapping from #{self} => #{params[:child]} - are you sure this object exists in the DB?"
+				end
 			end
 		end
 	end

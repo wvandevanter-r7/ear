@@ -6,12 +6,12 @@ class EarLogger
 	include Singleton
 
 	def log(message)
-		puts "[.] EAR: " << message	
+		puts "[_] EAR: " << message	
 	end
 
 	######
 	def log_debug(message) 
-		puts "[x] EAR: " << message
+		puts "[D] EAR: " << message
 	end
 
 	def log_good(message)
