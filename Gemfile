@@ -17,8 +17,8 @@ gem 'nokogiri'
 # EAR Data lookup:
 gem 'geoip'
 gem 'whois'
-gem 'pcaprub'
-gem 'packetfu'
+#gem 'pcaprub'
+#gem 'packetfu'
 gem 'flickr'
 gem 'exifr'
 

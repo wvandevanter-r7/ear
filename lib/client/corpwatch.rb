@@ -23,8 +23,10 @@ class CorpwatchService
 			search_uri = get_service_endpoint(search_string)
 
 			# Open page & parse
-			doc = Nokogiri::XML(open(search_uri), "User-Agent" => EAR::USER_AGENT_STRING)
-
+			doc = Nokogiri::XML(open(search_uri, {"User-Agent" => EAR::USER_AGENT_STRING})) do |config|
+			  config.noblanks
+			end
+			
 			# Check the doc metadata
 			metadata = {}
 			doc.xpath("/corpwatch/meta").map do |m|
@@ -36,8 +38,11 @@ class CorpwatchService
 
 			# For each result, create a corp
 			doc.xpath("/corpwatch/result/companies").children.each do |child|
-				corps << Corpwatch::Corporation.new.parse(child)
+			  x = Corpwatch::Corporation.new
+		    x.parse(child)
+		    corps << x
 			end
+			
 		end
 		return corps
 	end
@@ -80,7 +85,7 @@ class Corporation
 	
 	def parse(xml_doc)
 		xml_doc.xpath(".").map do |x|
-			binding.pry
+			#binding.pry
 			@cw_id = x.xpath("cw_id").text
 			@cik = x.xpath("cik").text
 			@company_name = x.xpath("company_name").text
