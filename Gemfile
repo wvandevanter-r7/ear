@@ -48,3 +48,9 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
+
+group :develop do
+	# Handy debugging
+	gem 'pry'
+end
+

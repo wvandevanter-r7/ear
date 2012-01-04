@@ -1,4 +1,6 @@
 Ear::Application.routes.draw do
+  resources :search_strings
+
   resources :domains
   resources :hosts
   resources :task_runs
