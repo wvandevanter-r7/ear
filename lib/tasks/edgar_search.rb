@@ -21,15 +21,22 @@ end
 # Default method, subclasses must override this
 def run
 	super
-	
-  x = Corpwatch::CorpwatchService.new
+
+	# Attach to the corpwatch service & search
+	x = Corpwatch::CorpwatchService.new
 	corps = x.search @object.name
-	
+
 	corps.each do |corp|
-	  # Create a new organization object
-	  o = create_object Organization, { :name => corp.company_name, :sources => ["Corpwatch"] }
-  end
-  
+		# Create a new organization object & attach a record
+		o = create_object Organization, { 
+			:name => corp.name, 
+			:address => corp.address, 
+			:state => corp.state,
+			:country => corp.country
+			}
+		Record.new :name => "EDGAR", :content => corp, :organization => o
+	end
+
 	# Queue a detailed search
 	TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
 end

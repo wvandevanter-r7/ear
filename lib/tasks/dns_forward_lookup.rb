@@ -1,7 +1,7 @@
 	require 'resolv'
 
 	def name
-		"forward_lookup"
+		"dns_forward_lookup"
 	end
 
 	## Returns a string which describes what this task does
@@ -21,23 +21,20 @@
 	def run
 		super
 
-	  #begin
 			# Handle Host object
 			if @object.kind_of?(Host)
 				if @object.name
 					resolved_address = Resolv.new.getaddress(@object.name)
 					@object.name = resolved_address
-					@object.save!					
+					@object.save!
 				end
 			# Handle Domain object
 			elsif @object.kind_of?(Domain)
 				resolved_address = Resolv.getaddress(@object.name)
 				@task_logger.log_good "Creating host object for #{resolved_address}"				
 				h = create_object Host, {:ip_address => resolved_address, :name => @object.name}
-			end		
-		#rescue Exception => e
-		#	@task_logger.log_error "Unable to lookup: #{e}"
-		#end
+			end
+
 	end
 
 	def cleanup

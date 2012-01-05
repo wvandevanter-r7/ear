@@ -26,14 +26,17 @@ end
 def run
 	super
 
-	# Wrap the whole thing in a begin, we could have URI's switched beneath us. 
-	#begin
+	x = Corpwatch::CorpwatchService.new
+	corps = x.search @object.name
 
-	raise "TODO - GET & PARSE DOC"
+	# Select the first corp & add the details
+	@object.address =  corps.first.address
+	@object.description = corps.first.industry_name
+	@object.state = corps.first.state
+	@object.country = corps.first.country
 
-	#rescue Exception => e
-	#	@task_logger.log_error "Caught Exception: #{e}"
-	#end
+	Record.new :name => "EDGAR", :content => corp, :organization => @object
+
 end
 
 def cleanup

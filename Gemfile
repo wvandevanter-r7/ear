@@ -15,6 +15,7 @@ gem 'nmap-parser'
 gem 'nokogiri'
 
 # EAR Data lookup:
+gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
 #gem 'pcaprub'

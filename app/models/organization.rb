@@ -2,6 +2,7 @@ class Organization < ActiveRecord::Base
 	has_many :domains
 	has_many :users
 	has_many :hosts	
+	has_many :records
 	
 	serialize :sources
 

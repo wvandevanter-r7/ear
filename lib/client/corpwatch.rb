@@ -54,19 +54,18 @@ end
 
 # This class represents a corporation as returned by the Corpwatch service. 
 class Corporation
-
 	attr_accessor :cw_id
 	attr_accessor :cik
-	attr_accessor :company_name
+	attr_accessor :name
 	attr_accessor :irs_number
 	attr_accessor :sic_code
 	attr_accessor :industry_name
 	attr_accessor :sic_sector
 	attr_accessor :sector_name
 	attr_accessor :source_type
-	attr_accessor :raw_address
-	attr_accessor :country_code
-	attr_accessor :subdiv_code
+	attr_accessor :address
+	attr_accessor :country
+	attr_accessor :state
 	attr_accessor :top_parent_id
 	attr_accessor :num_parents
 	attr_accessor :num_children
@@ -81,23 +80,20 @@ class Corporation
 	#
 	#	Returns: Nothing
 	#
-	require 'pry'
-	
 	def parse(xml_doc)
 		xml_doc.xpath(".").map do |x|
-			#binding.pry
 			@cw_id = x.xpath("cw_id").text
 			@cik = x.xpath("cik").text
-			@company_name = x.xpath("company_name").text
+			@name = x.xpath("company_name").text
 			@irs_number = x.xpath("irs_number").text
 			@sic_code = x.xpath("sic_code").text
-			@industry_name = x.xpath("industry_name").text
+			@industry = x.xpath("industry_name").text
 			@sic_sector = x.xpath("sic_sector").text
 			@sector_name = x.xpath("sector_name").text
 			@source_type = x.xpath("source_type").text
-			@raw_address = x.xpath("raw_address").text
-			@country_code = x.xpath("country_code").text
-			@subdiv_code = x.xpath("subdiv_code").text
+			@address = x.xpath("raw_address").text
+			@country = x.xpath("country_code").text
+			@state = x.xpath("subdiv_code").text
 			@top_parent_id = x.xpath("top_parent_id").text
 			@num_parents = x.xpath("num_parents").text
 			@num_children = x.xpath("num_children").text

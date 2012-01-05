@@ -1,7 +1,7 @@
 require 'resolv'
 
 	def name
-		"reverse_lookup"
+		"dns_reverse_lookup"
 	end
 
 	def description
@@ -20,25 +20,19 @@ require 'resolv'
 	def run
 		super
 
-		# Wrap the whole thing
-		#begin
-			# Do the lookup
-			name = Resolv.new.getname(@object.ip_address).to_s
-			if name
-				# Set our hostname
-				@object.name = name 			
-				@object.save!
-				# Create a new domain object
-				@task_logger.log_good "Creating domain #{name}"
-        create_object Domain, {:name => name}
-			else
-				@task_logger.log_error "Unable to find a name"
-			end
-		#rescue Exception => e
-		#	EarLogger.instance.log "Encountered Exception #{e}"
-		#end
+		name = Resolv.new.getname(@object.ip_address).to_s
+		if name
+			# Set our hostname
+			@object.name = name
+			@object.save!
+			# Create a new domain object
+			@task_logger.log_good "Creating domain #{name}"
+			create_object Domain, {:name => name}
+		else
+			@task_logger.log_error "Unable to find a name"
+		end
 	end
-		
+
 	def cleanup
 		super
 	end

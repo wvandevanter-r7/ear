@@ -22,7 +22,7 @@
 		ip = "#{rand(100)}.#{rand(100)}.#{rand(100)}.#{rand(100)}"
 		x = create_object Device, { :ip_address => ip }
 	end
-	
+
 	def cleanup
 		super
 	end
