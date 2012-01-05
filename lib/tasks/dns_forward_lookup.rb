@@ -1,42 +1,42 @@
-	require 'resolv'
+require 'resolv'
 
-	def name
-		"dns_forward_lookup"
-	end
+def name
+	"dns_forward_lookup"
+end
 
-	## Returns a string which describes what this task does
-	def description
-		"Forward DNS Lookup"
-	end
+## Returns a string which describes what this task does
+def description
+	"Forward DNS Lookup"
+end
 
-	## Returns an array of valid types for this task
-	def allowed_types
-		[Host, Domain]
-	end
-	
-	def setup(object, options={})
-		super(object, options)
-	end
+## Returns an array of valid types for this task
+def allowed_types
+	[Host, Domain]
+end
 
-	def run
-		super
+def setup(object, options={})
+	super(object, options)
+end
 
-			# Handle Host object
-			if @object.kind_of?(Host)
-				if @object.name
-					resolved_address = Resolv.new.getaddress(@object.name)
-					@object.name = resolved_address
-					@object.save!
-				end
-			# Handle Domain object
-			elsif @object.kind_of?(Domain)
-				resolved_address = Resolv.getaddress(@object.name)
-				@task_logger.log_good "Creating host object for #{resolved_address}"				
-				h = create_object Host, {:ip_address => resolved_address, :name => @object.name}
+def run
+	super
+
+		# Handle Host object
+		if @object.kind_of?(Host)
+			if @object.name
+				resolved_address = Resolv.new.getaddress(@object.name)
+				@object.name = resolved_address
+				@object.save!
 			end
+		# Handle Domain object
+		elsif @object.kind_of?(Domain)
+			resolved_address = Resolv.getaddress(@object.name)
+			@task_logger.log_good "Creating host object for #{resolved_address}"				
+			h = create_object Host, {:ip_address => resolved_address, :name => @object.name}
+		end
 
-	end
+end
 
-	def cleanup
-		super
-	end
+def cleanup
+	super
+end
