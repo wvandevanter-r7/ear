@@ -45,9 +45,9 @@ class Task
 			:task_object_id => @object.id, 
 			:task_options_hash => @options )
 
-		@task_logger.log_good "Task object: #{@object}"
-		@task_logger.log_good "Task options: #{@options}"
-		@task_logger.log_good "Task run: #{@task_run}"
+		@task_logger.log "Task object: #{@object}"
+		@task_logger.log "Task options: #{@options}"
+		@task_logger.log "Task run: #{@task_run}"
 	end
 	
 	# Override!
