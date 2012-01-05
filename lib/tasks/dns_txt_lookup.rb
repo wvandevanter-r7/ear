@@ -33,7 +33,7 @@ def run
 		# If we got a success to the AXFR query.
 		if res_answer
 			@task_logger.log_good "TXT lookup succeeded on #{@object.name}:\n #{res_answer.answer}"
-			@object.records << Record.create({:name => "dns_txt_lookup", :content => res_answer.to_s})
+			@object.records << Record.create({:name => "dns_txt_lookup", :content => res_answer})
 		end
 
 	rescue Dnsruby::Refused
