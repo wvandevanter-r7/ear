@@ -26,7 +26,7 @@ def run
 		answer = Whois::Client.new.query(@object.name)
 		resolved_list = nil
 	rescue Exception => e
-		puts "Unable to query whois: #{e}"
+		@task_logger.log "Unable to query whois: #{e}"
 	end	
 
 	# For each authoritive nameserver
