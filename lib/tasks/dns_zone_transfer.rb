@@ -21,15 +21,17 @@ end
 def run
 	super
 
-	# Get the authoritative nameservers & query each of them
-	answer = Whois::Client.new.query(@object.name)
-	resolved_list = nil
+	begin 
+		# Get the authoritative nameservers & query each of them
+		answer = Whois::Client.new.query(@object.name)
+		resolved_list = nil
+	rescue Exception => e
+		puts "Unable to query whois: #{e}"
+	end	
 
 	# For each authoritive nameserver
 	answer.nameservers.each do |nameserver|
 		begin
-	
-
 			@task_logger.log "Attempting Zone Transfer on #{@object} against nameserver #{nameserver}"
 
 			res = Dnsruby::Resolver.new(
