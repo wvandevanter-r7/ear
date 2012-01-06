@@ -5,6 +5,7 @@ gem 'rails', '3.1.2'
 # Use edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+gem 'pg'
 gem 'sqlite3'
 gem 'therubyracer'
 
