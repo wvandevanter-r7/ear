@@ -1,6 +1,7 @@
 class CreateRecords < ActiveRecord::Migration
   def change
     create_table :records do |t|
+      t.integer :truthiness
       t.string :name
       t.string :object_type
       t.text :content
