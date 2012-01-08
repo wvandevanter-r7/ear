@@ -45,7 +45,7 @@ def run
 			@task_logger.log "Using Company search URI: #{company_uri}"
 
 			# Create a new organization object
-			o = create_object Organization, { :name => company_name, :sources => [company_uri] }
+			o = create_object(Organization, { :name => company_name, :sources => [company_uri] })
 
 			# Queue a detailed search
 			TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})

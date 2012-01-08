@@ -29,14 +29,9 @@ def run
 	x = Corpwatch::CorpwatchService.new
 	corps = x.search @object.name
 
-	# Select the first corp & add the details
-	@object.address =  corps.first.address
-	@object.description = corps.first.industry_name
-	@object.state = corps.first.state
-	@object.country = corps.first.country
-
-	Record.new :name => "EDGAR", :content => corp, :organization => @object
-
+	# Attach to the first object
+	create_object(PhysicalLocation, {:address => corps.first.address, :state => corps.first.state, :country => corps.first.country })
+	create_object(Record, {:name => "edgar_info", :object_type => corp.class.to_s, :content => corp})
 end
 
 def cleanup

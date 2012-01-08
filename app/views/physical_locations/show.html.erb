@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Address:</b>
+  <%= @physical_location.address %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @physical_location.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @physical_location.state %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @physical_location.country %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%= @physical_location.zip %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @physical_location.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @physical_location.longitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_physical_location_path(@physical_location) %> |
+<%= link_to 'Back', physical_locations_path %>

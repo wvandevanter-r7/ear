@@ -1,4 +1,6 @@
 Ear::Application.routes.draw do
+  resources :physical_locations
+
   resources :records
 
   resources :search_strings

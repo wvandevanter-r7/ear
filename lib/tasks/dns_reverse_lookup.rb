@@ -27,7 +27,7 @@ def run
 		@object.save!
 		# Create a new domain object
 		@task_logger.log_good "Creating domain #{name}"
-		create_object Domain, {:name => name}
+		create_object(Domain, {:name => name})
 	else
 		@task_logger.log_error "Unable to find a name"
 	end

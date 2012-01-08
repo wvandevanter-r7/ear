@@ -47,8 +47,8 @@ def run
 			# If we resolved, create the right objects
 			if resolved_address
 				@task_logger.log_good "Creating domain and host objects..."			
-				create_object Domain, {:name => domain, :organization => @object.organization }
-				create_object Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization}
+				create_object(Domain, {:name => domain, :organization => @object.organization })
+				create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization})
 			end
 
 		rescue Exception => e

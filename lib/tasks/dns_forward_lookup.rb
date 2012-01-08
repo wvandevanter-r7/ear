@@ -32,7 +32,7 @@ def run
 		elsif @object.kind_of?(Domain)
 			resolved_address = Resolv.getaddress(@object.name)
 			@task_logger.log_good "Creating host object for #{resolved_address}"				
-			h = create_object Host, {:ip_address => resolved_address, :name => @object.name}
+			h = create_object(Host, {:ip_address => resolved_address, :name => @object.name})
 		end
 
 end

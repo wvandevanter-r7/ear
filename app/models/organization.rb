@@ -3,6 +3,7 @@ class Organization < ActiveRecord::Base
 	has_many :users
 	has_many :hosts	
 	has_many :records
+	has_many :physical_locations
 	
 	serialize :sources
 

@@ -4,7 +4,6 @@ class CreateDomains < ActiveRecord::Migration
       t.string :name
       t.string :status
       t.integer :organization_id
-      t.text :sources
       t.timestamps
     end
   end

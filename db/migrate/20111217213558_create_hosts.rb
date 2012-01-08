@@ -4,7 +4,6 @@ class CreateHosts < ActiveRecord::Migration
       t.string :name
       t.string :ip_address
       t.integer :organization_id
-      t.text :sources
       t.text :notes
       t.timestamps
     end

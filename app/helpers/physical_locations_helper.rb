@@ -1,0 +1,2 @@
+module PhysicalLocationsHelper
+end
