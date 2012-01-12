@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'nokogiri'
 	
+module Ear
+module Client
 module Corpwatch
 
 # This class represents the corpwatch service
@@ -48,7 +50,7 @@ class CorpwatchService
 	end
 
 	def get_service_endpoint(company_name)
-		return "http://api.corpwatch.org/companies.xml?company_name=#{company_name}&key=#{EAR::CORPWATCH_API_KEY}"
+		return "http://api.corpwatch.org/companies.xml?company_name=#{company_name}&key=#{Ear::ApiKeys.instance.keys['corpwatch_api_key']}"
 	end
 end
 
@@ -56,7 +58,7 @@ end
 class Corporation
 	attr_accessor :cw_id
 	attr_accessor :cik
-	attr_accessor :name
+	attr_accessor :company_name
 	attr_accessor :irs_number
 	attr_accessor :sic_code
 	attr_accessor :industry_name
@@ -84,7 +86,7 @@ class Corporation
 		xml_doc.xpath(".").map do |x|
 			@cw_id = x.xpath("cw_id").text
 			@cik = x.xpath("cik").text
-			@name = x.xpath("company_name").text
+			@company_name = x.xpath("company_name").text
 			@irs_number = x.xpath("irs_number").text
 			@sic_code = x.xpath("sic_code").text
 			@industry = x.xpath("industry_name").text
@@ -103,4 +105,6 @@ class Corporation
 	end
 end
 
+end
+end
 end
