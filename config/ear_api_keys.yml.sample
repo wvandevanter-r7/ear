@@ -1,2 +1,8 @@
+# Corpwatch - http://api.corpwatch.org/
 corpwatch_api_key=""
+# Google Loader - http://code.google.com/apis/loader/signup.html
 google_api_key=""
+# LinkedIn - https://developer.linkedin.com
+linkedin_api_key: ""
+linkedin_secret_key: "" 
+

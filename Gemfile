@@ -14,15 +14,23 @@ gem 'fastercsv'
 gem 'rex'
 gem 'nmap-parser'
 gem 'nokogiri'
+gem 'json'
 
-# EAR Data lookup:
+# Data Formats
+gem 'exifr'
+
+# Network Services:
 gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
 #gem 'pcaprub'
 #gem 'packetfu'
+
+# Web Services
+gem 'linkedin'
 gem 'flickr'
-gem 'exifr'
+
+
 
 # Gems used only for assets and not required
 # in production environments by default.

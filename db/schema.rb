@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120107082825) do
 
   create_table "domains", :force => true do |t|
+    t.integer  "truthiness"
     t.string   "name"
     t.string   "status"
     t.integer  "organization_id"
@@ -22,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20120107082825) do
   end
 
   create_table "hosts", :force => true do |t|
+    t.integer  "truthiness"
     t.string   "name"
     t.string   "ip_address"
     t.integer  "organization_id"
@@ -47,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20120107082825) do
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.text     "sources"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120107082825) do
   end
 
   create_table "records", :force => true do |t|
+    t.integer  "truthiness"
     t.string   "name"
     t.string   "object_type"
     t.text     "content"
@@ -78,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20120107082825) do
   end
 
   create_table "search_strings", :force => true do |t|
+    t.integer  "truthiness"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -94,11 +97,11 @@ ActiveRecord::Schema.define(:version => 20120107082825) do
   end
 
   create_table "users", :force => true do |t|
+    t.integer  "truthiness"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "alias"
     t.integer  "organization_id"
-    t.text     "sources"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
