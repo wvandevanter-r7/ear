@@ -1,5 +1,9 @@
 require 'resolv'
 
+##
+## Thanks to @darkoperator for the tld records
+##
+
 def name
   "dns_tld_brute"
 end
