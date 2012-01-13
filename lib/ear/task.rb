@@ -84,15 +84,17 @@ class Task
     # Call the create method for this type
     new_object = type.send(:create, params)
 
-    # Check for dupes / Log
-    if new_object
+    # Check for dupes & return right away if this doesn't save a new
+    # object. This should prevent the object mapping from getting created.
+    if new_object.save
       @task_logger.log_good "Created new object: #{new_object}"
     else
-      @task_logger.log "Could not save object, perhaps it already exists?"
+      @task_logger.log "Could not save object, are you sure it's valid & doesn't already exist?"
       return false
     end
 
-    ## Keep track of the information that created this object
+    # If we have a new object, then we should keep track of the information
+    # that created this object
     @task_logger.log "Associating #{current_object} with #{new_object}"
     current_object.associate_child({:child => new_object, :task_run => @task_run})
   new_object

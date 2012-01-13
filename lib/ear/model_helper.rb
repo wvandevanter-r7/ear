@@ -103,7 +103,7 @@ module ModelHelper
       end
 =end  
       def _map_child(params)
-        begin
+        #begin
           EarLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"
           ObjectMapping.create(
             :parent_id => self.id,
@@ -111,9 +111,9 @@ module ModelHelper
             :child_id => params[:child].id,
             :child_type => params[:child].class.to_s,
             :task_run_id => params[:task_run].id || nil)      
-        rescue
-          EarLogger.instance.log_error "Could not create mapping from #{self} => #{params[:child]} - are you sure this object exists in the DB?"
-        end
+        #rescue
+        #  EarLogger.instance.log_error "Could not create mapping from #{self} => #{params[:child]} - are you sure this object exists in the DB?"
+        #end
       end
     end
   end

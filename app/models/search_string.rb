@@ -1,9 +1,9 @@
 class SearchString < ActiveRecord::Base
 
-	include ModelHelper
+  include ModelHelper
 
   def to_s
-	  "#{self.class}: #{self.name}"
-	end
+    "#{self.class}: #{self.name}"
+  end
 
 end

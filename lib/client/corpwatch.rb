@@ -41,7 +41,7 @@ class CorpwatchService
       # For each result, create a corp
       doc.xpath("/corpwatch/result/companies").children.each do |child|
         x = Corpwatch::Corporation.new
-        x.parse(child)
+        x.parse_xml(child)
         corps << x
       end
       
@@ -82,7 +82,7 @@ class Corporation
   #
   #  Returns: Nothing
   #
-  def parse(xml_doc)
+  def parse_xml(xml_doc)
     xml_doc.xpath(".").map do |x|
       @cw_id = x.xpath("cw_id").text
       @cik = x.xpath("cik").text
@@ -104,6 +104,14 @@ class Corporation
     end
   end
 end
+
+  def to_yaml
+  
+  end
+
+  def to_s
+    "#{@company_name}: #{@address} #{@state} #{@country}"
+  end
 
 end
 end

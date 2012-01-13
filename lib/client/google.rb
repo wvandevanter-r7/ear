@@ -32,7 +32,7 @@ class SearchService
       
     JSON.parse(response.string)['responseData']['results'].each do |result| 
       s = SearchResult.new
-      s.parse(result)
+      s.parse_json(result)
       results << s
     end
     
@@ -60,7 +60,7 @@ class SearchResult
   #
   #  Returns: Nothing
   #
-  def parse(result)
+  def parse_json(result)
     @gsearch_result_class = result['GsearchResultClass']
     @unescaped_url = result['unescapedUrl']
     @url = result['url']

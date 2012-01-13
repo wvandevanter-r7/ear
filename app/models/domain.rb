@@ -1,13 +1,13 @@
 class Domain < ActiveRecord::Base
   belongs_to :organization
-	has_many :records
-	
-	serialize :sources
+  has_many :records
+  
+  serialize :sources
 
-	include ModelHelper
+  include ModelHelper
 
   def to_s
-	  "#{self.class}: #{self.name}"
-	end
+    "#{self.class}: #{self.name}"
+  end
 
 end

@@ -53,9 +53,17 @@ def run
             zt.server = nameserver
             zone = zt.transfer(@object.name)
 
+            # Create host records for each item in the zone
+            zone.each do |z|
+              next unless z.type == "A" # Can't do anything here
+              create_object Host, { 
+               :ip_address => z.address.to_s, 
+               :name => z.name.to_s }
+            end
+
             # Record keeping
             @task_logger.log_good "Zone Tranfer Succeeded on #{@object.name}"
-            @object.records << create_object(Record, {:name => "dns_zone_transfer", :object_type => zone.class.to_s, :content => zone})
+            @object.records << create_object(Record, {:name => "dns_zone_transfer", :object_type => "String", :content => zone.to_s})
           end
 
         rescue Dnsruby::Refused
@@ -67,8 +75,8 @@ def run
         rescue Dnsruby::ResolvTimeout
           @task_logger.log "Timed out while querying #{nameserver} for #{@object.name}."
 
-        #rescue Exception => e
-        #  @task_logger.log "Unknown exception: #{e}"
+        rescue Exception => e
+          @task_logger.log "Unknown exception: #{e}"
 
         end
       end
