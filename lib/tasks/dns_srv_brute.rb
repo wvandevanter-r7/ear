@@ -23,6 +23,7 @@ end
 def run
   super
 
+
   if @options['subdomain_list']
     subdomain_list = @options['subdomain_list']
   else
