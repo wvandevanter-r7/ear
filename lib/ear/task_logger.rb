@@ -21,7 +21,7 @@ class TaskLogger
   end
 
   def log_error(message)
-    puts "[-] #{@name}: " << message
+    puts "[x] #{@name}: " << message
   end
   ######
 

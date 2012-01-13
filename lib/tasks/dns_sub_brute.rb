@@ -24,11 +24,12 @@ def run
   super
 
 
-  if options['subdomain_list']
-    # Add a builtin domain list  
-    subdomain_list = ["www", "ns1", "ns2", "ns3", "test", "mail", "owa", "vpn", "admin" ]
+  if @options['subdomain_list']
+    subdomain_list = @options['subdomain_list']
   else
-    subdomain_list = options['subdomain_list']
+    # Add a builtin domain list  
+    subdomain_list = ["www", "ww2", "ns1", "ns2", "ns3", "test", "mail", "owa", "vpn", "admin",
+      "gateway", "secure", "admin", "service", "tools", "doc", "docs", "network", "help", "en" ]
   end
 
   @task_logger.log_good "Using subdomain list: #{subdomain_list}"
