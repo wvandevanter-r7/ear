@@ -8,8 +8,8 @@
 .bundle
 
 # Ignore configuration files
-config/database.config
-config/ear_api_keys.config
+config/database.yml
+config/ear_api_keys.yml
 
 # Ignore the default SQLite database.
 db/*.sqlite3
