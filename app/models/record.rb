@@ -3,6 +3,8 @@ class Record < ActiveRecord::Base
 
   serialize :content
 
+  include ModelHelper
+
   def to_s
     "#{self.class}: #{name} (#{object_type})"
   end

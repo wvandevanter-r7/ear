@@ -36,17 +36,21 @@ def setup(object, options={})
       :content => contents}
     )
   rescue OpenURI::HTTPError => e
-   @task_logger.log "Unable to connect: #{e}"
+    @task_logger.log "Unable to connect: #{e}"
+  rescue Net::HTTPBadResponse => e
+    @task_logger.log "Unable to connect: #{e}"
   rescue EOFError => e
-   @task_logger.log "Unable to connect: #{e}"
+    @task_logger.log "Unable to connect: #{e}"
   rescue SocketError => e
-   @task_logger.log "Unable to connect: #{e}"
+    @task_logger.log "Unable to connect: #{e}"
   rescue RuntimeError => e
-   @task_logger.log "Unable to connect: #{e}"
+    @task_logger.log "Unable to connect: #{e}"
   rescue SystemCallError => e
-   @task_logger.log "Unable to connect: #{e}"
+    @task_logger.log "Unable to connect: #{e}"
   rescue Encoding::InvalidByteSequenceError => e
-   @task_logger.log "Encoding error: #{e}"
+    @task_logger.log "Encoding error: #{e}"
+  rescue Encoding::UndefinedConversionError => e
+    @task_logger.log "Encoding error: #{e}"
   end
 
 
