@@ -22,7 +22,7 @@ def setup(object, options={})
   end
   
   begin
-    @task_logger.log "Connecting to #{url}" 
+    @task_logger.log "Connecting to #{url} for #{@object}" 
 
     # Prevent encoding errors
     # Encoding::UndefinedConversionError: "\xEF" from ASCII-8BIT to UTF-8
@@ -37,15 +37,16 @@ def setup(object, options={})
     )
   rescue OpenURI::HTTPError => e
    @task_logger.log "Unable to connect: #{e}"
-     
+  rescue EOFError => e
+   @task_logger.log "Unable to connect: #{e}"
   rescue SocketError => e
    @task_logger.log "Unable to connect: #{e}"
-  
   rescue RuntimeError => e
    @task_logger.log "Unable to connect: #{e}"
-  
   rescue SystemCallError => e
    @task_logger.log "Unable to connect: #{e}"
+  rescue Encoding::InvalidByteSequenceError => e
+   @task_logger.log "Encoding error: #{e}"
   end
 
 
