@@ -14,25 +14,40 @@ end
 
 def setup(object, options={})
   super(object, options)
+
+  if @object.kind_of? Host
+    url = "http://#{@object.ip_address}/robots.txt"
+  else
+    url = "http://www.#{@object.name}/robots.txt"
+  end
   
   begin
-    if @object.kind_of? Host
-      @task_logger.log "Connecting to http://www.#{@object.name}" 
-      contents = open("http://#{@object.ip_address}")
-    else #Domain
-      @task_logger.log "Connecting to http://www.#{@object.name}" 
-      contents = open("http://www.#{@object.name}")
-    end
+    @task_logger.log "Connecting to #{url}" 
+
+    # Prevent encoding errors
+    # Encoding::UndefinedConversionError: "\xEF" from ASCII-8BIT to UTF-8
+    #ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+    contents = open("#{url}").read.encode Encoding::ISO_8859_1, :undef => :replace
+
+    # Create a record and save the content of the robot.txt file
+    @object.records << create_object(Record, {
+      :name => "robots_txt", 
+      :object_type => "String", 
+      :content => contents}
+    )
+  rescue OpenURI::HTTPError => e
+   @task_logger.log "Unable to connect: #{e}"
+     
   rescue SocketError => e
-   @task_logger.log "Unable to connect" 
-   return 
+   @task_logger.log "Unable to connect: #{e}"
+  
+  rescue RuntimeError => e
+   @task_logger.log "Unable to connect: #{e}"
+  
+  rescue SystemCallError => e
+   @task_logger.log "Unable to connect: #{e}"
   end
 
-  @object.records << create_object(Record, {
-    :name => "robots_txt", 
-    :object_type => "String", 
-    :content => contents.read}
-  )
 
 end
 

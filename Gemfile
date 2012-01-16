@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'therubyracer'
 
 # EAR Data manipulation
+#gem 'iconv'
 gem 'fastercsv'
 gem 'rex'
 gem 'nmap-parser'
@@ -29,8 +30,6 @@ gem 'whois'
 # Web Services
 gem 'linkedin'
 gem 'flickr'
-
-
 
 # Gems used only for assets and not required
 # in production environments by default.
