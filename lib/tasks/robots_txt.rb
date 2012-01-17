@@ -25,9 +25,7 @@ def setup(object, options={})
     @task_logger.log "Connecting to #{url} for #{@object}" 
 
     # Prevent encoding errors
-    # Encoding::UndefinedConversionError: "\xEF" from ASCII-8BIT to UTF-8
-    #ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-    contents = open("#{url}").read.encode Encoding::ISO_8859_1, :undef => :replace
+    contents = open("#{url}").read.force_encoding('UTF-8')
 
     # Create a record and save the content of the robot.txt file
     @object.records << create_object(Record, {
@@ -52,8 +50,6 @@ def setup(object, options={})
   rescue Encoding::UndefinedConversionError => e
     @task_logger.log "Encoding error: #{e}"
   end
-
-
 end
 
 ## Default method, subclasses must override this
