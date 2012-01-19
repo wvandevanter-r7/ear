@@ -23,7 +23,11 @@ end
 def run
   super
 
-  if @options['subdomain_list']
+		# :subdomain_list => list of subdomains to brute
+		# :mashed_domains => try domain names w/o a dot, see if anyone's hijacked a common "subdomain"
+
+
+  if @options[:subdomain_list]
     subdomain_list = @options['subdomain_list']
   else
     # Add a builtin domain list  
@@ -37,7 +41,13 @@ def run
     begin
 
       # Calculate the domain name
-      domain = "#{sub}.#{@object.name}"
+			if @options[:mashed_domains]
+				# blatently stolen from HDM's webinar on password stealing, try without a dot to see
+				# if this domain has been hijacked by someone - great for finding phishing attempts
+				domain = "#{sub}#{@object.name}"
+			else	
+	      domain = "#{sub}.#{@object.name}"
+			end
 
       # Try to resolve
       resolved_address = Resolv.new.getaddress(domain)

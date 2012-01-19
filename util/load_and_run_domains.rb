@@ -17,10 +17,11 @@ f.each do |line|
 	
 		# Screenshot task. -- add more tasks here.
 		#d.run_task "web_screenshot", { :timeout => "20" }
-		d.run_task "web_grab", { :timeout => "20" }
-	
+		#d.run_task "web_grab", { :timeout => "20" }
+		d.run_task "dns_srv_brute"
+
 		# Print the contents of the page (from the grab task)
-		puts d.records.first.content 
+		#puts d.records.first.content 
 
 		# Or by relationship
 		#puts d.children.first.content
