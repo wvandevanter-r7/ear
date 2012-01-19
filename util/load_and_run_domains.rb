@@ -1,10 +1,10 @@
 #!/usr/bin/ruby
 
 # make sure this file is in the root of the ear directory
-require "#{File.expand_path(File.dirname(__FILE__))}../config/environment"
+require "#{File.expand_path(File.dirname(__FILE__))}/../config/environment"
 
 # open up a list of domains
-f = File.open("data/domain_top1k.txt", "r")
+f = File.open("../data/domain_top1k.list", "r")
 
 puts "Running..."
 # For each domain
@@ -16,7 +16,7 @@ f.each do |line|
 		d = Domain.create :name => line.strip
 	
 		# Screenshot task. -- add more tasks here.
-		d.run_task "web_screenshot", { :timeout => "20" }
+		#d.run_task "web_screenshot", { :timeout => "20" }
 		d.run_task "web_grab", { :timeout => "20" }
 	
 		# Print the contents of the page (from the grab task)
