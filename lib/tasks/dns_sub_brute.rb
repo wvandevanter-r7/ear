@@ -58,6 +58,7 @@ def run
         @task_logger.log_good "Creating domain and host objects..."      
         create_object(Domain, {:name => domain, :organization => @object.organization })
         create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization})
+        @object.records << create_object(Record, {:name => "dns_sub_brute", :object_type => "String", :content => "#{domain} #{resolved_address}" })
       end
 
     rescue Exception => e
