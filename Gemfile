@@ -31,6 +31,9 @@ gem 'whois'
 gem 'linkedin'
 gem 'flickr'
 
+# Scraping
+gem 'selenium-webdriver'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

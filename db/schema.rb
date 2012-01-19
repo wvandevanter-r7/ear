@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(:version => 20120107082825) do
     t.string   "name"
     t.integer  "task_object_id"
     t.string   "task_object_type"
-    t.string   "task_options_hash"
+    t.text     "task_options_hash"
     t.integer  "object_mapping_id"
     t.datetime "created_at"
     t.datetime "updated_at"
