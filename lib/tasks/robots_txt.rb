@@ -45,6 +45,8 @@ def setup(object, options={})
     @task_logger.log "Unable to connect: #{e}"
   rescue SystemCallError => e
     @task_logger.log "Unable to connect: #{e}"
+  rescue ArgumentError => e
+    @task_logger.log "Argument Error #{e}"
   rescue Encoding::InvalidByteSequenceError => e
     @task_logger.log "Encoding error: #{e}"
   rescue Encoding::UndefinedConversionError => e
