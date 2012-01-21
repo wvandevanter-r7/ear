@@ -52,12 +52,10 @@ class Task
   
   # Override!
   def run
-
   end
   
   # Basic cleanup method
   def cleanup
-
   end
   
   ## Checks for validity

@@ -1,9 +1,5 @@
 require 'resolv'
 
-##
-## Thanks to @darkoperator for the service records
-##
-
 def name
   "dns_srv_brute"
 end
@@ -20,10 +16,13 @@ end
 
 def setup(object, options={})
   super(object, options)
+  
+    @resolver  = Dnsruby::DNS.new # uses system default
+  
   self
 end
 
-## Default method, subclasses must override this
+# Default method, subclasses must override this
 def run
   super
   
@@ -59,14 +58,23 @@ def run
       domain = "#{srv}.#{@object.name}"
 
       # Try to resolve
-      resolved_address = Resolv.new.getaddress(domain)
-      @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
+      @resolver.getresources(domain, "SRV").collect do |rec|
+
+        # Grab the components of the record
+        resolved_address = rec.target
+        port = rec.port
+        weight = rec.weight
+        priority = rec.priority
+        
+         @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
       
-      # If we resolved, create the right objects
-      if resolved_address
-        @task_logger.log_good "Creating domain and host objects..."      
-        create_object(Domain, {:name => domain, :organization => @object.organization })
-        create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization})
+        # If we resolved, create the right objects
+        if resolved_address
+          @task_logger.log_good "Creating domain and host objects..."
+          d = create_object(Domain, {:name => domain, :organization => @object.organization })
+          h = create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization}) # TODO - set domain
+          #s = create_object(Service, {:type => "tcp", :port => port, :host => h})
+        end
       end
 
     rescue Exception => e

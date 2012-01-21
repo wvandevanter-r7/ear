@@ -29,6 +29,8 @@ def run
 
   # Find more info here: http://www.icann.org/en/tlds/
 
+  # @chrisjohnriley passed along this:https://mxr.mozilla.org/mozilla-central/source/netwerk/dns/effective_tld_names.dat?raw=1 
+
 =begin
   if @options['cctld_list']
     cctld_list = @options['cctld_list']

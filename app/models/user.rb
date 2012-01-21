@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   belongs_to :organization
   has_many :records
 
-  serialize :sources
+  after_save :log
 
   include ModelHelper
 
@@ -14,4 +14,9 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+private
+  def log
+    EarLogger.instance.log self.to_s
+  end
+  
 end

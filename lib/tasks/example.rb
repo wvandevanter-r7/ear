@@ -20,7 +20,7 @@ end
 def run
   super
   ip = "#{rand(100)}.#{rand(100)}.#{rand(100)}.#{rand(100)}"
-  x = create_object Device, { :ip_address => ip }
+  x = create_object Host, { :ip_address => ip }
 end
 
 def cleanup

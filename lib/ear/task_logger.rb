@@ -5,24 +5,31 @@ class TaskLogger
 
   def initialize(name)
     @name = name
+    @out = File.open(File.join(Rails.root,"log","ear.log"), "a")
   end
 
   def log(message)
-    puts "[_] #{@name}: " << message  
+    _log "[_] #{@name}: " << message  
   end
 
   ######
   def log_debug(message) 
-    puts "[D] #{@name}: " << message
+    _log "[D] #{@name}: " << message
   end
 
   def log_good(message)
-    puts "[+] #{@name}: " << message
+    _log "[+] #{@name}: " << message
   end
 
   def log_error(message)
-    puts "[x] #{@name}: " << message
+    _log "[-] #{@name}: " << message
   end
   ######
+
+private 
+  def _log(message) 
+   @out.puts message
+   @out.flush
+  end
 
 end

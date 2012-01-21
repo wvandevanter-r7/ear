@@ -82,12 +82,12 @@ module ModelHelper
       #  of this object
       # 
       def to_graph(indent=nil)
-        out = "Parents: "
-        self.parents.each { |parent| out += " #{parent}" }
-        out += "\nObject: #{self.to_s}\n"
-        out += "Children: "
-        self.children.each { |child| out += " #{child}" }
-        return out
+        out = "Parents:\n"
+        self.parents.each { |parent| out << " #{parent}" }
+        out << "\nObject: #{self.to_s}\n"
+        out << "Children:\n"
+        self.children.each { |child| out << " #{child}" }
+        out
       end
 
 =begin

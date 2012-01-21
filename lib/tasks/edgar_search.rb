@@ -31,8 +31,15 @@ def run
     o = create_object Organization, { 
       :name => corp.name, 
     }
-    o.locations << create_object(PhysicalLocation, {:address => corps.first.address, :state => corps.first.state, :country => corps.first.country })
-    o.records << create_object(Record, {:name => "edgar_search", :object_type => corp.class.to_s, :content => corp})
+    o.locations << create_object(PhysicalLocation, {
+      :address => corps.first.address, 
+      :state => corps.first.state,
+      :country => corps.first.country }
+      )
+    o.records << create_object(Record, {
+      :name => "edgar_search", 
+      :object_type => corp.class.to_s, 
+      :content => corp})
   end
 
   # Queue a detailed search
