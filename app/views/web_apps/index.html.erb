@@ -1,0 +1,27 @@
+<h1>Listing web_apps</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Fingerprint</th>
+    <th>Port</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @web_apps.each do |web_app| %>
+  <tr>
+    <td><%= web_app.name %></td>
+    <td><%= web_app.fingerprint %></td>
+    <td><%= web_app.port %></td>
+    <td><%= link_to 'Show', web_app %></td>
+    <td><%= link_to 'Edit', edit_web_app_path(web_app) %></td>
+    <td><%= link_to 'Destroy', web_app, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Web app', new_web_app_path %>

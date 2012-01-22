@@ -31,7 +31,7 @@ def run
 
   # Attach to the first object
   create_object(PhysicalLocation, {:address => corps.first.address, :state => corps.first.state, :country => corps.first.country })
-  create_object(Record, {:name => "edgar_detail", :object_type => corp.class.to_s, :content => corp})
+  #create_object(Record, {:name => "edgar_detail", :object_type => corp.class.to_s, :content => corp})
 end
 
 def cleanup

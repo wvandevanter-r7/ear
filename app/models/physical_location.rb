@@ -1,5 +1,8 @@
 class PhysicalLocation < ActiveRecord::Base
+  belongs_to :organization
   after_save :log
+
+  include ModelHelper
 
 private
   def log

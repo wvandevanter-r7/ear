@@ -1,8 +1,7 @@
 class SearchString < ActiveRecord::Base
-
-  include ModelHelper
-
   after_save :log
+  
+  include ModelHelper
 
   def to_s
     "#{self.class}: #{self.name}"

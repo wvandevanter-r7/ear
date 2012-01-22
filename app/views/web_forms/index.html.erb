@@ -1,0 +1,27 @@
+<h1>Listing web_forms</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Action</th>
+    <th>Fields</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @web_forms.each do |web_form| %>
+  <tr>
+    <td><%= web_form.name %></td>
+    <td><%= web_form.action %></td>
+    <td><%= web_form.fields %></td>
+    <td><%= link_to 'Show', web_form %></td>
+    <td><%= link_to 'Edit', edit_web_form_path(web_form) %></td>
+    <td><%= link_to 'Destroy', web_form, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Web form', new_web_form_path %>

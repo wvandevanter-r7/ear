@@ -1,6 +1,9 @@
 class Domain < ActiveRecord::Base
   belongs_to :organization
-  has_many :records
+  has_many   :hosts
+
+  validates_uniqueness_of :name
+  validates_presence_of   :name
 
   after_save :log
   

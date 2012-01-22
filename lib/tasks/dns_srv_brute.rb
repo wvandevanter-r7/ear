@@ -51,6 +51,8 @@ def run
 
   @task_logger.log_good "Using srv list: #{srv_list}"
 
+  srv_records = []
+
   srv_list.each do |srv|
     begin
 
@@ -60,25 +62,29 @@ def run
       # Try to resolve
       @resolver.getresources(domain, "SRV").collect do |rec|
 
-        # Grab the components of the record
+        # split up the record
         resolved_address = rec.target
         port = rec.port
         weight = rec.weight
         priority = rec.priority
-        
-         @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
-      
+
+        @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
+
         # If we resolved, create the right objects
         if resolved_address
           @task_logger.log_good "Creating domain and host objects..."
           d = create_object(Domain, {:name => domain, :organization => @object.organization })
-          h = create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization}) # TODO - set domain
-          #s = create_object(Service, {:type => "tcp", :port => port, :host => h})
+          h = create_object(Host, {:ip_address => resolved_address, :domain => d })
+          s = create_object(NetSvc, {:type => "tcp", :port => port, :host => h})
         end
-      end
 
+         # Collect the records for our task log
+        srv_records << rec.to_s
+      end
     rescue Exception => e
       @task_logger.log_error "Hit exception: #{e}"
     end
+
+     @task_run.result_content = srv_records.to_s
   end
 end

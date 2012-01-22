@@ -30,7 +30,7 @@ def run
   #begin
     # Search URI
     search_uri = "http://www.hoovers.com/search/company-search-results/100005142-1.html?type=company&term=#{@object.name}"
-    
+
     # Open page & parse
     @task_logger.log "Using Company URI: #{search_uri}"
     doc = Nokogiri::HTML(open(search_uri, "User-Agent" => EAR::USER_AGENT_STRING))

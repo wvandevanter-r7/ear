@@ -28,11 +28,12 @@ def setup(object, options={})
     contents = open("#{url}").read.force_encoding('UTF-8')
 
     # Create a record and save the content of the robot.txt file
-    @object.records << create_object(Record, {
-      :name => "robots_txt", 
-      :object_type => "String", 
-      :content => contents}
-    )
+    #@object.records << create_object(Record, {
+    #  :name => "robots_txt", 
+    #  :object_type => "String", 
+    #  :content => contents}
+    #)
+    
   rescue OpenURI::HTTPError => e
     @task_logger.log "Unable to connect: #{e}"
   rescue Net::HTTPBadResponse => e

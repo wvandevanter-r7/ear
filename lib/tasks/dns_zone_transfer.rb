@@ -63,7 +63,7 @@ def run
 
             # Record keeping
             @task_logger.log_good "Zone Tranfer Succeeded on #{@object.name}"
-            @object.records << create_object(Record, {:name => "dns_zone_transfer", :object_type => "String", :content => zone.to_s})
+            #@object.records << create_object(Record, {:name => "dns_zone_transfer", :object_type => "String", :content => zone.to_s})
           end
 
         rescue Dnsruby::Refused

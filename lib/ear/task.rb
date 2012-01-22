@@ -1,6 +1,6 @@
 class Task
 
-  ## Rails compatibility ##
+  # Rails model compatibility #
   def self.all
     TaskManager.tasks
   end
@@ -58,9 +58,8 @@ class Task
   def cleanup
   end
   
-  ## Checks for validity
+  # Checks for validity
   def valid?
-    return true
   end
   
   def to_s
@@ -107,16 +106,11 @@ class Task
     EarLogger.instance.log "Object: #{object}"
     EarLogger.instance.log "Options: #{options}"
 
-    #begin
-      self.setup(object, options)
-      self.run
-      self.cleanup
-    #rescue Exception => e
-    #  EarLogger.instance.log_error "Error running: #{e}"
-    #  return false
-    #end
+    self.setup(object, options)
+    self.run
+    self.cleanup
 
-  return true
+  true
   end
 
 end

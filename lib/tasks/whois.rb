@@ -29,7 +29,7 @@ def run
   # TODO - parse this badboy up
 
   if answer
-    @object.records << create_object(Record, {:name => "whois", :object_type => answer.class.to_s, :content => answer})
+    #@object.records << create_object(Record, {:name => "whois", :object_type => answer.class.to_s, :content => answer})
   else
     @task_logger.log "Domain WHOIS failed, we don't know what nameserver to query."
   end

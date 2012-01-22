@@ -20,17 +20,32 @@ end
 def run
   super
 
-  name = Resolv.new.getname(@object.ip_address).to_s
-  if name
-    # Set our hostname
-    @object.name = name
-    @object.save!
-    # Create a new domain object
-    @task_logger.log_good "Creating domain #{name}"
-    create_object(Domain, {:name => name})
-  else
-    @task_logger.log_error "Unable to find a name"
+  begin
+
+    resolved_name = Resolv.new.getname(@object.ip_address).to_s
+
+    if resolved_name
+      @task_logger.log_good "Creating domain #{name}"
+      
+      # Create our new domain object with the resolved name
+      d = create_object(Domain, {:name => resolved_name})
+
+      # Assocate the resolved name with the host
+      @object.domains << d # add a domain name for this host
+      d.hosts << @object # add this host as an address
+
+      # Save the raw data
+      @task_run.save_raw_content(resolved_name.to_s)
+
+    else
+      @task_logger.log "Unable to find a name for #{@object.ip_address}"
+    end
+
+  rescue Exception => e
+    @task_logger.log_error "Hit exception: #{e}"
   end
+
+
 end
 
 def cleanup

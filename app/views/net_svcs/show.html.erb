@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @net_svc.name %>
+</p>
+
+<p>
+  <b>Fingerprint:</b>
+  <%= @net_svc.fingerprint %>
+</p>
+
+<p>
+  <b>Port:</b>
+  <%= @net_svc.port %>
+</p>
+
+
+<%= link_to 'Edit', edit_net_svc_path(@net_svc) %> |
+<%= link_to 'Back', net_svcs_path %>

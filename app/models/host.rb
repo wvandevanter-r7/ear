@@ -1,11 +1,11 @@
 class Host < ActiveRecord::Base
-  belongs_to :organization
-  has_many :records
-
-  after_save :log
+  has_many     :net_svcs
+  has_many     :domains
 
   validates_uniqueness_of :ip_address
-  validates_presence_of :ip_address
+  validates_presence_of   :ip_address
+
+  after_save   :log
 
   include ModelHelper
 
