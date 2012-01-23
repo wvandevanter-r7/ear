@@ -1,9 +1,15 @@
 class WebForm < ActiveRecord::Base
   belongs_to :web_app
+  has_many    :task_runs
+  has_many    :task_results, :through => :task_runs
 
   after_save :log
 
   include ModelHelper
+
+  def to_s
+    "#{self.class}: #{self.name} - #{self.url} -> #{self.action}"
+  end
 
 private
   def log

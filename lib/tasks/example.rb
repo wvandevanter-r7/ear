@@ -23,7 +23,7 @@ def run
   ip_address = "#{rand(255)}.#{rand(255)}.#{rand(255)}.#{rand(255)}"
   x = create_object Host, { :ip_address => ip_address }
   # Keep track of our raw data
-  @task_run.result_content = ip_address
+  @task_run.save_raw_result ip_address
 end
 
 def cleanup

@@ -87,7 +87,7 @@ class Task
       @task_logger.log_good "Created new object: #{new_object}"
     else
       @task_logger.log "Could not save object, are you sure it's valid & doesn't already exist?"
-      return false
+      new_object = find_object type, params
     end
 
     # If we have a new object, then we should keep track of the information
@@ -96,6 +96,22 @@ class Task
     current_object.associate_child({:child => new_object, :task_run => @task_run})
   new_object
   end
+
+  # ooh, this is dangerous metamagic. -- would need to be revisited if we do 
+  # something weird with the models. for now, it should be sufficent to generally
+  # send "name" and special case anything else.
+  def find_object(type, params)
+    if type == Host
+      return Host.find_by_ip_address params['ip_address']
+    else
+      if params.has_key? "name"
+        return type.send(:find_by_name, params["name"])
+      else
+        raise "Don't know how to find this object of type #{type}"
+      end
+    end
+  end
+
 
   # 
   # Run the task. Convenience method. Do not override

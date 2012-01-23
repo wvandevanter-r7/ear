@@ -58,12 +58,20 @@ def run
       
       # If we resolved, create the right objects
       if resolved_address
-        @task_logger.log_good "Creating domain and host objects..."      
-        create_object(Domain, {:name => domain, :organization => @object.organization })
-        create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization})
+ 
+        @task_logger.log_good "Creating domain and host objects..."
+
+        # create new host and domain objects
+        d = create_object(Domain, {:name => domain, :organization => @object.organization })
+        h = create_object(Host, {:ip_address => resolved_address, :organization => @object.organization})
+
+        # Associate our host and domain objects. 
+        d.hosts << h
+        h.domains << d
+
       end
 
-      result_list << "#{domain}: #{resolved_address}"
+      @task_run.save_raw_result  "#{domain}: #{resolved_address}"
 
     rescue Exception => e
       @task_logger.log_error "Hit exception: #{e}"
@@ -71,6 +79,6 @@ def run
   end
   
   # Keep track of our raw data
-  @task_run.result_content= resolved_addresses.to_s
+
   
 end

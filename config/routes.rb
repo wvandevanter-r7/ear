@@ -1,4 +1,6 @@
 Ear::Application.routes.draw do
+  resources :task_results
+
   resources :web_apps
 
   resources :web_forms

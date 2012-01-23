@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "domains", :force => true do |t|
-    t.integer  "truthiness"
+    t.integer  "metric"
     t.string   "name"
     t.string   "status"
     t.integer  "organization_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "hosts", :force => true do |t|
-    t.integer  "truthiness"
+    t.integer  "metric"
     t.string   "ip_address"
     t.integer  "domain_id"
     t.datetime "created_at"
@@ -32,7 +32,9 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "net_svcs", :force => true do |t|
+    t.integer  "metric"
     t.string   "name"
+    t.string   "type"
     t.string   "fingerprint"
     t.integer  "port"
     t.datetime "created_at"
@@ -50,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "organizations", :force => true do |t|
+    t.integer  "metric"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
@@ -57,6 +60,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "physical_locations", :force => true do |t|
+    t.integer  "metric"
+    t.string   "name"
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -70,8 +75,17 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "search_strings", :force => true do |t|
-    t.integer  "truthiness"
+    t.integer  "metric"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "task_results", :force => true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.text     "content"
+    t.integer  "task_run_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -81,15 +95,21 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "task_object_id"
     t.string   "task_object_type"
     t.text     "task_options_hash"
-    t.string   "result_type"
-    t.text     "result_content"
     t.integer  "object_mapping_id"
+    t.integer  "organization_id"
+    t.integer  "physical_location_id"
+    t.integer  "user_id"
+    t.integer  "domain_id"
+    t.integer  "host_id"
+    t.integer  "net_svc_id"
+    t.integer  "web_app_id"
+    t.integer  "web_form_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "truthiness"
+    t.integer  "metric"
     t.string   "fname"
     t.string   "lname"
     t.string   "email_address"
@@ -111,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "web_forms", :force => true do |t|
     t.string   "name"
+    t.string   "url"
     t.string   "action"
     t.text     "fields"
     t.datetime "created_at"

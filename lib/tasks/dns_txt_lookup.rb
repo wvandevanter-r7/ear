@@ -30,11 +30,15 @@ def run
 
     res_answer = res.query(@object.name, Dnsruby::Types.TXT)
 
-    # If we got a success to the AXFR query.
+    # If we got a success to the query.
     if res_answer
       @task_logger.log_good "TXT lookup succeeded on #{@object.name}:\n #{res_answer.answer}"
-      #@object.records << create_object(Record, {:name => "dns_txt_lookup", :object_type => "String", :content => res_answer.to_s})
+
+      # TODO - Parse for netbocks and hostnames
+
     end
+
+    @task_run.save_raw_result res_answer.to_s
 
   rescue Dnsruby::Refused
     @task_logger.log "Zone Transfer against #{@object.name} refused."

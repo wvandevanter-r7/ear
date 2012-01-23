@@ -1,4 +1,4 @@
-#require 'selenium-webdriver'
+require 'base64'
 require 'timeout'
 
 def name
@@ -47,6 +47,7 @@ def run
       @task_logger.log "Navigating to & snapshotting http://www.#{@object.name}"
       driver.navigate.to browse_location
       driver.save_screenshot save_location
+          @task_run.save_raw_result Base64.encode64(File.open(save_location,"r").read)
     end
 
     # Close it up if we didn't pass in a browser

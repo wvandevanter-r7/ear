@@ -9,7 +9,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Domain, Host]
+  [WebApp]
 end
 
 def setup(object, options={})
@@ -27,12 +27,9 @@ def setup(object, options={})
     # Prevent encoding errors
     contents = open("#{url}").read.force_encoding('UTF-8')
 
-    # Create a record and save the content of the robot.txt file
-    #@object.records << create_object(Record, {
-    #  :name => "robots_txt", 
-    #  :object_type => "String", 
-    #  :content => contents}
-    #)
+    # TODO - parse & use the lines as seed paths
+
+    @task_run.save_raw_result contents
     
   rescue OpenURI::HTTPError => e
     @task_logger.log "Unable to connect: #{e}"

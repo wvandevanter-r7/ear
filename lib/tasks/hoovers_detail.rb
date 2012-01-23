@@ -4,7 +4,7 @@ require 'cgi'
 
 # Returns the name of this task.
 def name
-  "hoovers_company_detail"
+  "hoovers_detail"
 end
 
 # Returns a string which describes this task.
@@ -41,7 +41,7 @@ def run
     # Use the first result from this search. If we've done the hoover's company
     # Search first, then we should be able to simply query for the company name
     # and use the first result
-    xpath = doc.xpath("//*[@class='company_name']").first
+    doc.xpath("//*[@class='company_name']").each do |xpath|
 
       # Construct the Company-specific URI's
       company_path = xpath.children.first['href']
@@ -63,9 +63,10 @@ def run
         @task_logger.log_good "Got City & State: #{city_state}"
 
         # Set the City and State
-        @object.street_address = street_address
-        @object.city = city_state.split(' ').first
-        @object.state = city_state.split(' ').last
+        @object.physical_locations << create_object(PhysicalLocation, {
+          :address => street_address,
+          :city => city_state.split(' ').first, 
+          :state => city_state.split(' ').last })
 
         # Get Users from the executive table
         (doc/"//*[@id=\"executivetable\"]").css('td').each do |user_line| 
@@ -79,16 +80,20 @@ def run
 
           # Create the user objects
           @task_logger.log_good "Adding user object for: #{full_name}"
-          create_object User, { :first_name => first_name, :last_name => last_name }
+          @object.users << create_object(User, { 
+            :first_name => first_name, 
+            :last_name => last_name })
         end
-  
+
         # Get Company Profile set this
         description = Nokogiri::XML((doc/"/html/body/div[3]/div[2]/div[7]/p").to_xml).text
+
+        @task_run.save_raw_result doc.to_s
 
       rescue Exception => e
         @task_logger.log_error "Caught Exception: #{e}"
       end
-    #end    
+    end    
   rescue Exception => e
     @task_logger.log_error "Caught Exception: #{e}"
   end

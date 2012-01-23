@@ -1,5 +1,5 @@
 class ObjectMapping < ActiveRecord::Base
-    has_one :task_run
+#    has_one :task_run
 
     def get_child
       EarLogger.instance.log "Trying to find #{child_type}:#{child_id}"

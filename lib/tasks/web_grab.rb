@@ -30,12 +30,7 @@ def setup(object, options={})
         # Prevent encoding errors
         contents = open("#{url}").read.force_encoding('UTF-8')
 
-        # Create a record and save the content of the robot.txt file
-        #@object.records << create_object(Record, {
-        #  :name => "web_record", 
-        #  :object_type => "String", 
-        #  :content => contents}
-        #)
+        @task_run.save_raw_result contents
       end
 
     rescue Timeout::Error

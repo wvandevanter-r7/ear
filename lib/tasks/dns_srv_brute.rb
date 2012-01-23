@@ -51,8 +51,6 @@ def run
 
   @task_logger.log_good "Using srv list: #{srv_list}"
 
-  srv_records = []
-
   srv_list.each do |srv|
     begin
 
@@ -73,18 +71,29 @@ def run
         # If we resolved, create the right objects
         if resolved_address
           @task_logger.log_good "Creating domain and host objects..."
+
+          # Create a domain. pass down the organization if we have it.
           d = create_object(Domain, {:name => domain, :organization => @object.organization })
-          h = create_object(Host, {:ip_address => resolved_address, :domain => d })
-          s = create_object(NetSvc, {:type => "tcp", :port => port, :host => h})
+
+          # Create a host to store the ip address
+          h = create_object(Host, {:ip_address => resolved_address, })
+
+          # associate the newly-created host with the domain
+          d.hosts << h 
+          h.domains << d
+          
+          # create a service, and also associate that with our host.
+          h.net_svcs << create_object(NetSvc, {:type => "tcp", :port => port, :host => h})
+
+          # Save the raw content of our query
+          @task_run.save_raw_result rec.to_s
         end
 
-         # Collect the records for our task log
-        srv_records << rec.to_s
       end
     rescue Exception => e
       @task_logger.log_error "Hit exception: #{e}"
     end
 
-     @task_run.result_content = srv_records.to_s
+
   end
 end
