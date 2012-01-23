@@ -17,6 +17,10 @@ class SearchService
   # Ruturns: An array of search results 
   #
   def search(search_string)
+    # Convert to a get-paramenter
+    search_string = CGI.escapeHTML search_string
+    search_string.gsub!(" ", "&nbsp;")
+  
   end
 end
 

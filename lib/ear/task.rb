@@ -45,6 +45,11 @@ class Task
       :task_object_id => @object.id, 
       :task_options_hash => @options )
 
+    # This is an AR relationship, so we can go back and access all tasks for 
+    # a particular object.
+    @object.task_runs << @task_run
+
+
     @task_logger.log "Task object: #{@object}"
     @task_logger.log "Task options: #{@options}"
     @task_logger.log "Task run: #{@task_run}"
