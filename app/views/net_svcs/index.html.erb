@@ -1,0 +1,27 @@
+<h1>Listing net_svcs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Fingerprint</th>
+    <th>Port</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @net_svcs.each do |net_svc| %>
+  <tr>
+    <td><%= net_svc.name %></td>
+    <td><%= net_svc.fingerprint %></td>
+    <td><%= net_svc.port %></td>
+    <td><%= link_to 'Show', net_svc %></td>
+    <td><%= link_to 'Edit', edit_net_svc_path(net_svc) %></td>
+    <td><%= link_to 'Destroy', net_svc, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Net svc', new_net_svc_path %>

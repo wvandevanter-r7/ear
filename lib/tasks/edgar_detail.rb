@@ -1,15 +1,11 @@
-require 'nokogiri'
-require 'open-uri'
-require 'cgi'
-
 # Returns the name of this task.
 def name
-  "edgar_info"
+  "edgar_detail"
 end
 
 # Returns a string which describes this task.
 def description
-  "This task hits the corpwatch API and creates organizations for all companies found."
+  "This task hits the corpwatch API and adds detail for the organization."
 end
 
 # Returns an array of valid types for this task
@@ -26,12 +22,18 @@ end
 def run
   super
 
-  x = Corpwatch::CorpwatchService.new
+  x = Ear::Client::Corpwatch::CorpwatchService.new
   corps = x.search @object.name
 
   # Attach to the first object
-  create_object(PhysicalLocation, {:address => corps.first.address, :state => corps.first.state, :country => corps.first.country })
-  create_object(Record, {:name => "edgar_detail", :object_type => corp.class.to_s, :content => corp})
+  @object.physical_locations << create_object(PhysicalLocation, {
+    :address => corps.first.address, 
+    :state => corps.first.state, 
+    :country => corps.first.country })
+
+  # Save off our raw data
+  @task_run.save_raw_result corps.join(" ")
+
 end
 
 def cleanup

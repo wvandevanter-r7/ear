@@ -1,7 +1,13 @@
 Ear::Application.routes.draw do
-  resources :physical_locations
+  resources :task_results
 
-  resources :records
+  resources :web_apps
+
+  resources :web_forms
+
+  resources :net_svcs
+
+  resources :physical_locations
 
   resources :search_strings
 

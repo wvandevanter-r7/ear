@@ -14,7 +14,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [SearchString, Organization]
+  [SearchString]
 end
 
 def setup(object, options={})
@@ -27,10 +27,10 @@ def run
   super
 
   # Wrap the whole thing in a begin, we could have URI's switched beneath us. 
-  #begin
+  begin
     # Search URI
     search_uri = "http://www.hoovers.com/search/company-search-results/100005142-1.html?type=company&term=#{@object.name}"
-    
+
     # Open page & parse
     @task_logger.log "Using Company URI: #{search_uri}"
     doc = Nokogiri::HTML(open(search_uri, "User-Agent" => EAR::USER_AGENT_STRING))
@@ -45,15 +45,17 @@ def run
       @task_logger.log "Using Company search URI: #{company_uri}"
 
       # Create a new organization object
-      o = create_object(Organization, { :name => company_name, :sources => [company_uri] })
+      o = create_object(Organization, { :name => company_name })
 
       # Queue a detailed search
       TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
 
     end
-  #rescue Exception => e
-  #  @task_logger.log_error "Caught Exception: #{e}"
-  #end
+
+    @task_run.save_raw_result doc.to_s
+  rescue Exception => e
+    @task_logger.log_error "Caught Exception: #{e}"
+  end
 end
 
 def cleanup

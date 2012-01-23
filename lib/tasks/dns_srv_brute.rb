@@ -60,25 +60,40 @@ def run
       # Try to resolve
       @resolver.getresources(domain, "SRV").collect do |rec|
 
-        # Grab the components of the record
+        # split up the record
         resolved_address = rec.target
         port = rec.port
         weight = rec.weight
         priority = rec.priority
-        
-         @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
-      
+
+        @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
+
         # If we resolved, create the right objects
         if resolved_address
           @task_logger.log_good "Creating domain and host objects..."
-          d = create_object(Domain, {:name => domain, :organization => @object.organization })
-          h = create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization}) # TODO - set domain
-          #s = create_object(Service, {:type => "tcp", :port => port, :host => h})
-        end
-      end
 
+          # Create a domain. pass down the organization if we have it.
+          d = create_object(Domain, {:name => domain, :organization => @object.organization })
+
+          # Create a host to store the ip address
+          h = create_object(Host, {:ip_address => resolved_address, })
+
+          # associate the newly-created host with the domain
+          d.hosts << h 
+          h.domains << d
+          
+          # create a service, and also associate that with our host.
+          h.net_svcs << create_object(NetSvc, {:type => "tcp", :port => port, :host => h})
+
+          # Save the raw content of our query
+          @task_run.save_raw_result rec.to_s
+        end
+
+      end
     rescue Exception => e
       @task_logger.log_error "Hit exception: #{e}"
     end
+
+
   end
 end

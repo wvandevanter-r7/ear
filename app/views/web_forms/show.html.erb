@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @web_form.name %>
+</p>
+
+<p>
+  <b>Action:</b>
+  <%= @web_form.action %>
+</p>
+
+<p>
+  <b>Fields:</b>
+  <%= @web_form.fields %>
+</p>
+
+
+<%= link_to 'Edit', edit_web_form_path(@web_form) %> |
+<%= link_to 'Back', web_forms_path %>

@@ -1,0 +1,29 @@
+<%= form_for(@net_svc) do |f| %>
+  <% if @net_svc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@net_svc.errors.count, "error") %> prohibited this net_svc from being saved:</h2>
+
+      <ul>
+      <% @net_svc.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :fingerprint %><br />
+    <%= f.text_field :fingerprint %>
+  </div>
+  <div class="field">
+    <%= f.label :port %><br />
+    <%= f.number_field :port %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,7 +1,6 @@
 $:.unshift(File.dirname(__FILE__))
 
 require '../../../config/environment'
-#require '../google'
 require 'test/unit'
 
 class TestGoogle < Test::Unit::TestCase

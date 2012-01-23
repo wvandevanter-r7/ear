@@ -67,6 +67,8 @@ def run
 
   @task_logger.log "Using gtld list: #{gtld_list}"
 
+    resolved_addresses = []
+
     gtld_list.each do |tld|
       begin
 
@@ -87,12 +89,20 @@ def run
         # If we resolved, create the right objects
         if resolved_address
           @task_logger.log_good "Creating domain and host objects..."
-          create_object(Domain, {:name => domain, :organization => @object.organization })
-          create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization})
+          d = create_object(Domain, {:name => domain, :organization => @object.organization })
+          h = create_object(Host, {:ip_address => resolved_address, :name => domain, :organization => @object.organization})
+          
+          # Associate our host and domain objects.
+          d.hosts << h
+          h.domains << d
         end
+
+        @task_run.save_raw_result "#{domain}: resolved_address"
 
       rescue Exception => e
         @task_logger.log_error "Hit exception: #{e}"
       end
+
+   
     end
 end

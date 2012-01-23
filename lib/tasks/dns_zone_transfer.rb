@@ -55,15 +55,28 @@ def run
 
             # Create host records for each item in the zone
             zone.each do |z|
-              next unless z.type == "A" # Can't do anything here
-              create_object Host, { 
-               :ip_address => z.address.to_s, 
-               :name => z.name.to_s }
+              if z.type == "A"
+                h = create_object Host, { :ip_address => z.address.to_s }
+                d = create_object Domain, { :name => z.name.to_s }
+                # Associate them 
+                h.domains << d
+                d.hosts << h
+              elsif z.type == "CNAME"
+                # TODO - recursively lookup cname host
+                @task_logger.log "TODO - handle a CNAME record"
+              elsif z.type == "MX"
+                # TODO - recursively lookup cname host
+                @task_logger.log "TODO - handle a MX record"
+              elsif z.type == "NS"
+                # TODO - recursively lookup cname host
+                @task_logger.log "TODO - handle a NS record"
+              end
             end
 
             # Record keeping
             @task_logger.log_good "Zone Tranfer Succeeded on #{@object.name}"
-            @object.records << create_object(Record, {:name => "dns_zone_transfer", :object_type => "String", :content => zone.to_s})
+            @task_run.save_raw_result zone.to_s
+
           end
 
         rescue Dnsruby::Refused

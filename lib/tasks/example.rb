@@ -19,8 +19,11 @@ end
 ## Default method, subclasses must override this
 def run
   super
-  ip = "#{rand(100)}.#{rand(100)}.#{rand(100)}.#{rand(100)}"
-  x = create_object Host, { :ip_address => ip }
+  # create an ip
+  ip_address = "#{rand(255)}.#{rand(255)}.#{rand(255)}.#{rand(255)}"
+  x = create_object Host, { :ip_address => ip_address }
+  # Keep track of our raw data
+  @task_run.save_raw_result ip_address
 end
 
 def cleanup

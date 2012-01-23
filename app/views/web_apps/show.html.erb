@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @web_app.name %>
+</p>
+
+<p>
+  <b>Fingerprint:</b>
+  <%= @web_app.fingerprint %>
+</p>
+
+<p>
+  <b>Port:</b>
+  <%= @web_app.port %>
+</p>
+
+
+<%= link_to 'Edit', edit_web_app_path(@web_app) %> |
+<%= link_to 'Back', web_apps_path %>

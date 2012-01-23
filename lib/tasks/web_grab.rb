@@ -20,45 +20,41 @@ def setup(object, options={})
   else
     url = "http://www.#{@object.name}"
   end
-  
+
     @task_logger.log "Connecting to #{url} for #{@object}" 
-	    
-		begin
 
-			status = Timeout.timeout 10 do
-		
-				# Prevent encoding errors
-			  contents = open("#{url}").read.force_encoding('UTF-8')
-	
-			  # Create a record and save the content of the robot.txt file
-			  @object.records << create_object(Record, {
-			    :name => "web_record", 
-			    :object_type => "String", 
-			    :content => contents}
-			  )
-			end
+    begin
 
-		rescue Timeout::Error
-			@task_logger.log "Timeout!"
-		rescue OpenURI::HTTPError => e
-			@task_logger.log "Unable to connect: #{e}"
-		rescue Net::HTTPBadResponse => e
-			@task_logger.log "Unable to connect: #{e}"
-		rescue EOFError => e
-			@task_logger.log "Unable to connect: #{e}"
-		rescue SocketError => e
-			@task_logger.log "Unable to connect: #{e}"
-		rescue RuntimeError => e
-			@task_logger.log "Unable to connect: #{e}"
-		rescue SystemCallError => e
-			@task_logger.log "Unable to connect: #{e}"
-		rescue ArgumentError => e
-			@task_logger.log "Argument Error #{e}"
-		rescue Encoding::InvalidByteSequenceError => e
-			@task_logger.log "Encoding error: #{e}"
-		rescue Encoding::UndefinedConversionError => e
-			@task_logger.log "Encoding error: #{e}"
-		end
+      status = Timeout.timeout 10 do
+
+        # Prevent encoding errors
+        contents = open("#{url}").read.force_encoding('UTF-8')
+
+        @task_run.save_raw_result contents
+      end
+
+    rescue Timeout::Error
+      @task_logger.log "Timeout!"
+    rescue OpenURI::HTTPError => e
+      @task_logger.log "Unable to connect: #{e}"
+    rescue Net::HTTPBadResponse => e
+      @task_logger.log "Unable to connect: #{e}"
+    rescue EOFError => e
+      @task_logger.log "Unable to connect: #{e}"
+    rescue SocketError => e
+      @task_logger.log "Unable to connect: #{e}"
+    rescue RuntimeError => e
+      @task_logger.log "Unable to connect: #{e}"
+    rescue SystemCallError => e
+      @task_logger.log "Unable to connect: #{e}"
+    rescue ArgumentError => e
+      @task_logger.log "Argument Error #{e}"
+    rescue Encoding::InvalidByteSequenceError => e
+      @task_logger.log "Encoding error: #{e}"
+    rescue Encoding::UndefinedConversionError => e
+      @task_logger.log "Encoding error: #{e}"
+    end
+
 end
 
 ## Default method, subclasses must override this

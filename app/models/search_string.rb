@@ -1,8 +1,10 @@
 class SearchString < ActiveRecord::Base
+  has_many     :task_runs
+  has_many    :task_results, :through => :task_runs
+  
+  after_save   :log
 
   include ModelHelper
-
-  after_save :log
 
   def to_s
     "#{self.class}: #{self.name}"

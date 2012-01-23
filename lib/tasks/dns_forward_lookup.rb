@@ -1,5 +1,3 @@
-require 'resolv'
-
 def name
   "dns_forward_lookup"
 end
@@ -11,7 +9,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Host, Domain]
+  [Domain]
 end
 
 def setup(object, options={})
@@ -21,18 +19,25 @@ end
 def run
   super
 
-    # Handle Host object
-    if @object.kind_of?(Host)
-      if @object.name
-        resolved_address = Resolv.new.getaddress(@object.name)
-        @object.name = resolved_address
-        @object.save!
+    begin
+      resolved_address = Resolv.new.getaddress(@object.name)
+      
+      if resolved_address
+        @task_logger.log_good "Creating host object for #{resolved_address}"
+        h = create_object(Host, {:ip_address => resolved_address, :name => @object.name})
+        
+        @object.hosts << h
+        h.domains << @object
+        
+        # save the raw data
+        @task_run.save_raw_result resolved_address
+
+      else
+        @task_logger.log "Unable to find address for #{@object.name}"
       end
-    # Handle Domain object
-    elsif @object.kind_of?(Domain)
-      resolved_address = Resolv.getaddress(@object.name)
-      @task_logger.log_good "Creating host object for #{resolved_address}"
-      h = create_object(Host, {:ip_address => resolved_address, :name => @object.name})
+
+    rescue Exception => e
+      @task_logger.log_error "Hit exception: #{e}"
     end
 
 end

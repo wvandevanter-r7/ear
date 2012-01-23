@@ -36,11 +36,9 @@ def run
       :state => corps.first.state,
       :country => corps.first.country }
       )
-    o.records << create_object(Record, {
-      :name => "edgar_search", 
-      :object_type => corp.class.to_s, 
-      :content => corp})
   end
+  
+  @task_run.save_raw_result corps.to_s
 
   # Queue a detailed search
   TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})

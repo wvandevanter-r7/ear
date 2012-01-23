@@ -21,15 +21,25 @@ def run
 
   begin 
     answer = Whois::Client.new.query(@object.name)
-    resolved_list = nil
   rescue Exception => e
     @task_logger.log "Unable to query whois: #{e}"
   end
 
-  # TODO - parse this badboy up
 
   if answer
-    @object.records << create_object(Record, {:name => "whois", :object_type => answer.class.to_s, :content => answer})
+    # TODO - parse this badboy up
+
+    answer.nameservers.each do |nameserver|
+      create_object Domain, :name => nameserver.to_s
+    end
+
+    # Contact
+    #answer.technical
+
+
+    # Save the raw data
+    @task_run.result_content = answer.to_s
+
   else
     @task_logger.log "Domain WHOIS failed, we don't know what nameserver to query."
   end
