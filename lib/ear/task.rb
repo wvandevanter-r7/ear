@@ -102,10 +102,10 @@ class Task
   # send "name" and special case anything else.
   def find_object(type, params)
     if type == Host
-      return Host.find_by_ip_address params['ip_address']
+      return Host.find_by_ip_address params[:ip_address]
     else
-      if params.has_key? "name"
-        return type.send(:find_by_name, params["name"])
+      if params.has_key? :name
+        return type.send(:find_by_name, params[:name])
       else
         raise "Don't know how to find this object of type #{type}"
       end

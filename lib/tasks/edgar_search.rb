@@ -23,7 +23,7 @@ def run
   super
 
   # Attach to the corpwatch service & search
-  x = Corpwatch::CorpwatchService.new
+  x = Ear::Client::Corpwatch::CorpwatchService.new
   corps = x.search @object.name
 
   corps.each do |corp|
@@ -31,7 +31,7 @@ def run
     o = create_object Organization, { 
       :name => corp.name, 
     }
-    o.locations << create_object(PhysicalLocation, {
+    o.physical_locations << create_object(PhysicalLocation, {
       :address => corps.first.address, 
       :state => corps.first.state,
       :country => corps.first.country }
