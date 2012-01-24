@@ -29,13 +29,31 @@ def run
   
   dork_strings.each do |dork|
 
-    # do the actual search
-    results = x.search "#{dork} inurl:#{@object.name}" 
+    # do the actual search - dependent on the type
+    if @object.kind_of?(Organization)
+      results = x.search "#{dork} inurl:#{@object.name}"
+    elsif @object.kind_of?(Domain)
+      results = x.search "#{dork} site:#{@object.name}"
+    else
+      results = x.search "#{dork}"
+    end
 
     results.each do |result|
+      
+      # Add the host 
+      
+      # add the webapp
+      
+      # add the webform? - if there's a form
+      
+      # need someway to represent a page? 
+      
+      #or vulnerability
+      
       # For now, just stick it on the task object - creating a specific object
       # is gonna take a little more thought
       @task_run.save_raw_result result.to_s
+      
     end
   end
 

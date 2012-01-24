@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "latitude"
     t.string   "longitude"
     t.integer  "organization_id"
+    t.integer  "user_id"
+    t.integer  "host_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -110,10 +112,10 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "users", :force => true do |t|
     t.integer  "metric"
-    t.string   "fname"
-    t.string   "lname"
+    t.string   "username"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email_address"
-    t.string   "alias"
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"

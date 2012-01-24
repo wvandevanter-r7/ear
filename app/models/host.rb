@@ -1,6 +1,7 @@
 class Host < ActiveRecord::Base
   has_many     :net_svcs
   has_many     :domains
+  has_many     :physical_locations
   has_many     :task_runs
   has_many     :task_results, :through => :task_runs
   

@@ -19,7 +19,7 @@ class ObjectManager
         children << mapping.get_child
       end
     end
-    return children
+  children
   end
   
   #
@@ -38,6 +38,23 @@ class ObjectManager
       end
     end
 
-    return parents
+  parents
   end
+  
+  def find_task_runs(id, type)
+      all_mapped_parents = ObjectMapping.all(
+          :conditions => {  :child_id => id,
+                            :child_type => type})
+    task_runs = []
+    if all_mapped_parents.kind_of? ObjectMapping
+      task_runs << all_mapped_parents.get_task_run
+    else
+      all_mapped_parents.each do |mapping|
+        task_runs << mapping.get_task_run
+      end
+    end
+
+  task_runs
+  end
+  
 end

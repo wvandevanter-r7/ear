@@ -20,6 +20,10 @@ class ObjectMapping < ActiveRecord::Base
       end
     end
 
+    def get_task_run
+      TaskRun.find self.task_run_id
+    end
+
     def to_s
       "#{self.class}: #{child_type}:#{child_id} <-> #{parent_type}:#{parent_id}"
     end 

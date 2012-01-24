@@ -8,7 +8,7 @@ class PhysicalLocation < ActiveRecord::Base
   include ModelHelper
   
   def to_s
-    "#{self.class}: #{address} #{city} #{state} #{country}"
+    "#{self.class}: #{address} #{city} #{state} #{country} (#{latitude} #{longitude})"
   end
   
 

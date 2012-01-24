@@ -26,10 +26,8 @@ def setup(object, options={})
     begin
 
       status = Timeout.timeout 10 do
-
         # Prevent encoding errors
         contents = open("#{url}").read.force_encoding('UTF-8')
-
         @task_run.save_raw_result contents
       end
 

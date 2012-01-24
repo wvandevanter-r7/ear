@@ -54,15 +54,17 @@ class InitialSchema < ActiveRecord::Migration
       t.string        :latitude
       t.string        :longitude
       t.integer       :organization_id
+      t.integer       :user_id
+      t.integer       :host_id
       t.timestamps
     end
 
     create_table      :users do |t|
       t.integer       :metric
-      t.string        :fname
-      t.string        :lname
+      t.string        :username
+      t.string        :first_name
+      t.string        :last_name
       t.string        :email_address
-      t.string        :alias
       t.integer       :organization_id
       t.timestamps
     end

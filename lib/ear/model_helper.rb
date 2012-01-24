@@ -38,6 +38,14 @@ module ModelHelper
         EarLogger.instance.log "Finding parents for #{self}"
         ObjectManager.instance.find_parents(self.id, self.class.to_s)
       end
+
+      #
+      # This method lets you find all available parents
+      #
+      def parent_tasks
+        EarLogger.instance.log "Finding task runs for #{self}"
+        ObjectManager.instance.find_task_runs(self.id, self.class.to_s)
+      end
       
       #
       # This method associates a child with this object
