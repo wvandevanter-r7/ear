@@ -10,7 +10,7 @@ class TaskRun < ActiveRecord::Base
   has_many :task_results
 
   def to_s
-    "Task ran on #{task_object_type}:#{task_object_id} with options #{task_options_hash}"
+    "#{name} task ran on #{task_object_type}:#{task_object_id} with options #{task_options_hash} - generated #{task_results.count} results"
   end
 
   def save_raw_result(content, type="String")
