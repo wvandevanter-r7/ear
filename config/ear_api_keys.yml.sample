@@ -5,4 +5,7 @@ google_api_key: ""
 # LinkedIn - https://developer.linkedin.com
 linkedin_api_key: ""
 linkedin_secret_key: "" 
-
+# Bing API key
+bing_api_key: ""
+# Pipl API key
+pipl_bronze_api_key: ""
