@@ -23,10 +23,24 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.datetime "updated_at"
   end
 
+  create_table "findings", :force => true do |t|
+    t.string   "name"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "hosts", :force => true do |t|
     t.integer  "metric"
     t.string   "ip_address"
     t.integer  "domain_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "net_blocks", :force => true do |t|
+    t.integer  "domain_id"
+    t.string   "range"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -122,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "web_apps", :force => true do |t|
+    t.integer  "metric"
     t.string   "name"
     t.string   "url"
     t.string   "fingerprint"
@@ -132,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "web_forms", :force => true do |t|
+    t.integer  "metric"
     t.string   "name"
     t.string   "url"
     t.string   "action"

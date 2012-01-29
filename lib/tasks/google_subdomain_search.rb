@@ -26,7 +26,7 @@ def run
   x = Ear::Client::Google::SearchService.new
 
   # Use the inurl: capability
-  results = x.search "inurl:#{@object.name}"
+  results = x.search "inurl:.#{@object.name}"
 
   results.each do |result|
     # Create a new domain

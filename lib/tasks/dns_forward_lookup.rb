@@ -24,7 +24,7 @@ def run
       
       if resolved_address
         @task_logger.log_good "Creating host object for #{resolved_address}"
-        h = create_object(Host, {:ip_address => resolved_address, :name => @object.name})
+        h = create_object(Host, {:ip_address => resolved_address})
         
         @object.hosts << h
         h.domains << @object

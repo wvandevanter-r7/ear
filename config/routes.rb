@@ -1,16 +1,12 @@
 Ear::Application.routes.draw do
+  resources :net_blocks
+  resources :findings
   resources :task_results
-
   resources :web_apps
-
   resources :web_forms
-
   resources :net_svcs
-
   resources :physical_locations
-
   resources :search_strings
-
   resources :domains
   resources :hosts
   resources :task_runs

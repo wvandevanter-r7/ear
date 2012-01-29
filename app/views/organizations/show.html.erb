@@ -10,31 +10,5 @@
   <%= @organization.description %>
 </p>
 
-<p>
-  <b>Street address:</b>
-  <%= @organization.street_address %>
-</p>
-
-<p>
-  <b>City:</b>
-  <%= @organization.city %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @organization.state %>
-</p>
-
-<p>
-  <b>Country:</b>
-  <%= @organization.country %>
-</p>
-
-<p>
-  <b>Zip:</b>
-  <%= @organization.zip %>
-</p>
-
-
 <%= link_to 'Edit', edit_organization_path(@organization) %> |
 <%= link_to 'Back', organizations_path %>

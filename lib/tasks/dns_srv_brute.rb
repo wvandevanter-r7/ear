@@ -76,7 +76,7 @@ def run
           d = create_object(Domain, {:name => domain, :organization => @object.organization })
 
           # Create a host to store the ip address
-          h = create_object(Host, {:ip_address => resolved_address, })
+          h = create_object(Host, {:ip_address => resolved_address})
 
           # associate the newly-created host with the domain
           d.hosts << h 

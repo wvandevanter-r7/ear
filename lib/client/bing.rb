@@ -40,6 +40,8 @@ class SearchService
     # Check for successful result
     return false unless doc
 
+    binding.pry
+
     #each result, create a SearchResult
     result_xml = doc.xpath("//web:Results", 
      "web" => "http://schemas.microsoft.com/LiveSearch/2008/04/XML/web")
@@ -66,17 +68,23 @@ class SearchResult
   end
 
   # 
-  #  Takes: A JSON search result
+  #  Takes: A search result
   #
   #  Returns: Nothing
   #
   def parse_xml(result)
+    puts "getting title #{result['title']}"
     @title = result['title']
     @description = result['description']
     @url = result['url']
     @display_url = result['display_url']
     @date_time = result['date_time']
   end
+  
+  def to_s
+    "#{@title} #{@description} #{@url} #{@date_time}"
+  end
+
 end
 
 end

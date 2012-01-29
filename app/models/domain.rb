@@ -1,6 +1,7 @@
 class Domain < ActiveRecord::Base
   belongs_to :organization
   has_many   :hosts
+  has_many   :netblocks
   has_many   :task_runs
   has_many    :task_results, :through => :task_runs
   

@@ -8,7 +8,7 @@ module Ear
   
     def initialize
       # Load in all known api keys
-      @keys = YAML.load_file(Rails.root + "config/ear_api_keys.yml")
+      @keys = YAML.load_file(File.join(File.dirname(__FILE__),"..","..","config","ear_api_keys.yml"))
     end
   end
 end

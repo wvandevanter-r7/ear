@@ -1,0 +1,1 @@
+Add a queue for all new objects coming in. - For instance, say we're grabbing all host objects on the local pc. we want to now run a module on these host objects (or a subset) to grab additional data. 

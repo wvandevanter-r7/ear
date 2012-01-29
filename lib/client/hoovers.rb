@@ -40,6 +40,11 @@ class SearchResult
   def parse_xml(result)
     @title = result['title']
   end
+  
+  def to_s
+    "#{@title}"
+  end
+  
 end
 
 end

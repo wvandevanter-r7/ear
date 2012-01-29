@@ -1,0 +1,21 @@
+<%= form_for(@net_block) do |f| %>
+  <% if @net_block.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@net_block.errors.count, "error") %> prohibited this net_block from being saved:</h2>
+
+      <ul>
+      <% @net_block.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :range %><br />
+    <%= f.text_field :range %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

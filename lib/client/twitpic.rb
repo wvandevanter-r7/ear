@@ -80,6 +80,10 @@ module TwitPic
       true
     end
 
+    def to_S
+      "Twitpic #{@local_path} #{@remote_path}"
+    end
+
   end
 end
 end

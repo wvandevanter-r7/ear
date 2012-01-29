@@ -1,7 +1,6 @@
 class InitialSchema < ActiveRecord::Migration
 
   def change
-
     create_table      :object_mappings do |t|
       t.integer       :child_id
       t.string        :child_type
@@ -78,6 +77,12 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :net_blocks do |t|
+      t.integer :domain_id
+      t.string :range
+      t.timestamps
+    end
+
     create_table      :hosts do |t|
       t.integer       :metric
       t.string        :ip_address
@@ -101,6 +106,7 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :web_apps do |t|
+      t.integer       :metric
       t.string        :name
       t.string        :url
       t.string        :fingerprint
@@ -110,6 +116,7 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :web_forms do |t|
+      t.integer       :metric
       t.string        :name
       t.string        :url
       t.string        :action
@@ -117,7 +124,11 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
-
+    create_table :findings do |t|
+      t.string :name
+      t.string :content
+      t.timestamps
+    end
+    
   end
-
 end

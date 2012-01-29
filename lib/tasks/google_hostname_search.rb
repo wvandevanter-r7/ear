@@ -22,12 +22,10 @@ end
 def run
   super
 
-  # Attach to the corpwatch service & search
   x = Ear::Client::Google::SearchService.new
   results = x.search @object.name
 
   results.each do |result|
-    # Create a new organization object & attach a record
     o = create_object Domain, { :name => result.visible_url }
   end
 

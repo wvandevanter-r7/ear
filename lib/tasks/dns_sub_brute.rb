@@ -63,7 +63,7 @@ def run
 
         # create new host and domain objects
         d = create_object(Domain, {:name => domain, :organization => @object.organization })
-        h = create_object(Host, {:ip_address => resolved_address, :organization => @object.organization})
+        h = create_object(Host, {:ip_address => resolved_address})
 
         # Associate our host and domain objects. 
         d.hosts << h

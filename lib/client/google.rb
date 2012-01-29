@@ -23,7 +23,7 @@ class SearchService
   def search(search_string)
 
     # Convert to a get-paramenter
-    search_string = CGI.escapeHTML search_string
+    #search_string = CGI.escapeHTML search_string
     search_string.gsub!(" ", "&nbsp;")
 
     results = []
@@ -45,7 +45,7 @@ class SearchService
   end
 end
 
-# This class represents a corporation as returned by the Corpwatch service. 
+# This class represents a searchresult. 
 class SearchResult
 
   attr_accessor :gsearch_result_class
@@ -75,6 +75,12 @@ class SearchResult
     @title_no_formatting = result['titleNoFormatting'] 
     @content = result['content']
   end
+  
+  def to_s
+    "#{@gsearch_result_class} #{@title} #{@url} #{@content}"
+  end
+
+  
 end
 
 end

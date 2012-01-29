@@ -90,7 +90,7 @@ def run
         if resolved_address
           @task_logger.log_good "Creating domain and host objects..."
           d = create_object(Domain, {:name => domain})
-          h = create_object(Host, {:ip_address => resolved_address, :name => domain})
+          h = create_object(Host, {:ip_address => resolved_address})
           
           # Associate our host and domain objects.
           d.organization = @object if @object.kind_of? Organization

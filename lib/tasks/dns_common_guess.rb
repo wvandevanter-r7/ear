@@ -23,7 +23,9 @@ def run
 
   @task_logger.log "Running DNS name guess on #{@object}"
 
-  domains = ["#{@object.name}.com", "#{@object.name}.net", "#{@object.name}.org"]
+  guess_name = @object.name.gsub(" ", "")
+
+  domains = ["#{guess_name}.com", "#{guess_name}.net", "#{guess_name}.org"]
 
   # For each of the suggested domains
   domains.each do |domain|
@@ -43,11 +45,11 @@ def run
 
     end
     rescue Dnsruby::Refused
-      @task_logger.log "Zone Transfer against #{@object.name} refused."
+      @task_logger.log "Lookup for #{guess_name} refused."
     rescue Dnsruby::ResolvError
-      @task_logger.log "Unable to resolve #{@object.name}"
+      @task_logger.log "Unable to resolve #{guess_name}"
     rescue Dnsruby::ResolvTimeout
-      @task_logger.log "Timed out while querying #{@object.name}."
+      @task_logger.log "Timed out while querying #{guess_name}."
     rescue Exception => e
       @task_logger.log "Unknown exception: #{e}"
     end

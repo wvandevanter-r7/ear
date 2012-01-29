@@ -75,6 +75,8 @@ GEM
     nmap-parser (0.3.5)
     nokogiri (1.5.0)
     oauth (0.4.5)
+    packetfu (1.1.5)
+    pcaprub (0.11.2)
     pg (0.12.2)
     polyglot (0.3.3)
     pry (0.9.7.4)
@@ -162,6 +164,8 @@ DEPENDENCIES
   linkedin
   nmap-parser
   nokogiri
+  packetfu
+  pcaprub
   pg
   pry
   rails (= 3.1.2)

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>String:</b>
+  <%= @finding.string %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @finding.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_finding_path(@finding) %> |
+<%= link_to 'Back', findings_path %>

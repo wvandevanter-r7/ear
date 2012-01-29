@@ -2,9 +2,7 @@
 
 <table>
   <tr>
-    <th>Name</th>
     <th>Ip address</th>
-    <th>Organization</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +10,7 @@
 
 <% @hosts.each do |host| %>
   <tr>
-    <td><%= host.name %></td>
     <td><%= host.ip_address %></td>
-    <td><%= host.organization_id %></td>
     <td><%= link_to 'Show', host %></td>
     <td><%= link_to 'Edit', edit_host_path(host) %></td>
     <td><%= link_to 'Destroy', host, confirm: 'Are you sure?', method: :delete %></td>

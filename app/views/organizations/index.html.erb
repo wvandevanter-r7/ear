@@ -4,11 +4,6 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Street address</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Country</th>
-    <th>Zip</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,11 +13,6 @@
   <tr>
     <td><%= organization.name %></td>
     <td><%= organization.description %></td>
-    <td><%= organization.street_address %></td>
-    <td><%= organization.city %></td>
-    <td><%= organization.state %></td>
-    <td><%= organization.country %></td>
-    <td><%= organization.zip %></td>
     <td><%= link_to 'Show', organization %></td>
     <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
     <td><%= link_to 'Destroy', organization, confirm: 'Are you sure?', method: :delete %></td>
