@@ -22,28 +22,26 @@ require 'iconv'
   def run
     super
 
-    loc = @db.city(@object.ip_address)
-  
-    ## Handle weird characters
-    if loc
-      count = 0
-      loc.each  do |value| 
-        if value.kind_of? String
-          loc[count] = ::Iconv.conv('UTF-8//IGNORE', 'UTF-8', loc[count]).to_s
-        end
-        count = count + 1
+    begin
+      @task_logger.log "looking up location for #{@object.ip_address}"
+      loc = @db.city(@object.ip_address)
+      if loc
+        @task_logger.log "adding location for #{@object.ip_address}"
+        create_object(PhysicalLocation, { 
+          :zip => loc.postal_code.force_encoding('UTF-8'),
+          :city => loc.city_name.force_encoding('UTF-8'),
+          :state => loc.region_name.force_encoding('UTF-8'),
+          :country => loc.country_name.force_encoding('UTF-8'),
+          :longitude => loc.longitude,
+          :latitude => loc.latitude})
       end
-
-      loc.each {|x| puts x}
-
-      location = create_object(PhysicalLocation, { 
-        :zip => loc.postal_code,
-        :city => loc.city_name,
-        :state => loc.region_name,
-        :country => loc.country_name,
-        :longitude => loc.longitude,
-        :latitude => loc.latitude})
-
+    rescue ArgumentError => e
+     @task_logger.log "Argument Error #{e}"
+    rescue Encoding::InvalidByteSequenceError => e
+     @task_logger.log "Encoding error: #{e}"
+    rescue Encoding::UndefinedConversionError => e
+     @task_logger.log "Encoding error: #{e}"
+    
     end
   end
   
