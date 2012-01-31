@@ -92,7 +92,13 @@ class TaskManager
     
     # TODO - workaround to deal with current lack of threading
     object, task, options = @queue.shift
-    task.execute(object,options)
+    if task.kind_of? Array
+      EarLogger.instance.log_error "Unable to run empty task!"
+      return false
+    else
+      task.execute(object,options)
+    end
+    true
   end
 
 private
