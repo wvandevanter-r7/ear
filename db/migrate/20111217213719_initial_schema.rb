@@ -98,15 +98,16 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table :net_svcs do |t|
       t.integer       :metric
-      t.string        :name
-      t.string        :type
+      t.integer       :host_id
       t.string        :fingerprint
-      t.integer       :port
+      t.string        :proto
+      t.integer       :port_num
       t.timestamps
     end
 
     create_table :web_apps do |t|
       t.integer       :metric
+      t.integer       :net_svc_id
       t.string        :name
       t.string        :url
       t.string        :fingerprint
@@ -117,6 +118,7 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table :web_forms do |t|
       t.integer       :metric
+      t.integer       :web_app_id
       t.string        :name
       t.string        :url
       t.string        :action

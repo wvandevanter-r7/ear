@@ -41,6 +41,7 @@ class Task
 
     @task_run = TaskRun.create(
       :name => name,
+      :type => nil,
       :task_object_type => @object.class.to_s,
       :task_object_id => @object.id, 
       :task_options_hash => @options )
@@ -48,7 +49,6 @@ class Task
     # This is an AR relationship, so we can go back and access all tasks for 
     # a particular object.
     @object.task_runs << @task_run
-
 
     @task_logger.log "Task object: #{@object}"
     @task_logger.log "Task options: #{@options}"
@@ -69,6 +69,12 @@ class Task
   
   def to_s
     "#{name}: #{description}"
+  end
+
+
+  def safe_system(command)
+    puts "UNSAFE DUDE."
+    `#{command}`
   end
 
   #

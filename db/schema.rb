@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "net_svcs", :force => true do |t|
     t.integer  "metric"
-    t.string   "name"
-    t.string   "type"
+    t.integer  "host_id"
     t.string   "fingerprint"
-    t.integer  "port"
+    t.string   "proto"
+    t.integer  "port_num"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "web_apps", :force => true do |t|
     t.integer  "metric"
+    t.integer  "net_svc_id"
     t.string   "name"
     t.string   "url"
     t.string   "fingerprint"
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "web_forms", :force => true do |t|
     t.integer  "metric"
+    t.integer  "web_app_id"
     t.string   "name"
     t.string   "url"
     t.string   "action"

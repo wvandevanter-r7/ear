@@ -9,9 +9,8 @@ class NetSvc < ActiveRecord::Base
   include ModelHelper
 
   def to_s
-    "#{self.class}: #{name} #{type}/#{port} #{fingerprint}"
+    "#{self.class}: #{proto}/#{port_num} #{fingerprint}"
   end
-
 
 private
   def log
