@@ -24,7 +24,7 @@ gem 'exifr'
 gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
-gem 'pcaprub'
+#gem 'pcaprub'
 gem 'packetfu'
 
 # Web Services
