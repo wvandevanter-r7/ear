@@ -5,12 +5,15 @@ gem 'rails', '3.1.2'
 # Use edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+# Console
+gem 'pry'
+
+# Rails / Database
 gem 'pg'
 gem 'sqlite3'
 gem 'therubyracer'
 
 # EAR Data manipulation
-#gem 'iconv'
 gem 'fastercsv'
 gem 'rex'
 gem 'nmap-parser'
