@@ -17,17 +17,16 @@ gem 'therubyracer'
 gem 'fastercsv'
 gem 'rex'
 gem 'nmap-parser'
-gem 'nokogiri'
 gem 'json'
 
 # Data Formats
 gem 'exifr'
 
 # Network Services:
+#gem 'pcaprub'
 gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
-#gem 'pcaprub'
 gem 'packetfu'
 
 # Web Services
@@ -35,7 +34,19 @@ gem 'linkedin'
 gem 'flickr'
 
 # Scraping
+gem 'nokogiri'
+
+# Heavy-duty scraping
 gem 'selenium-webdriver'
+gem 'capybara'
+# https://github.com/thoughtbot/capybara-webkit#readme
+# apt-get install libqt4-dev libqtwebkit-dev
+gem 'capybara-webkit' # Requires QTwebkit
+# gem 'headless'
+
+
+
+
 
 # Gems used only for assets and not required
 # in production environments by default.

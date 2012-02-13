@@ -1,4 +1,5 @@
 Ear::Application.routes.draw do
+  resources :tasks
   resources :net_blocks
   resources :findings
   resources :task_results

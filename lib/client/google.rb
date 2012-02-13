@@ -1,9 +1,45 @@
 require 'open-uri'
 require 'cgi'
+require "capybara"  
+require "capybara/dsl"  
+require "capybara-webkit"  
 
 module Ear
 module Client
 module Google
+
+############################  
+# DEPENDENCIES:  
+#  
+# Install the capybara gem:  
+# $ gem install capybara  
+#  
+# Then, follow instructions from https://github.com/thoughtbot/capybara-webkit#readme   
+# and install the capybara-webkit gem and drivers:  
+# $ sudo apt-get install libqt4-dev libqtwebkit-dev  
+# $ gem install capybara-webkit  
+############################  
+
+class SearchScraper
+  include Capybara::DSL  
+    
+    def initialize
+      Capybara.run_server = false
+      Capybara.default_selector = :xpath
+      Capybara.current_driver = :webkit
+      Capybara.app_host = "http://www.google.com/"
+    end
+    
+    def search(term)
+      uris = []
+      visit('/')
+      fill_in "q", :with => term  
+      click_button "Google Search"
+      results = all("//li[@class='g']/h3/a")
+      results.each { |r| uris << r[:href]}
+    uris
+    end
+end
 
 # This class represents the google AJAX API
 # 
@@ -80,7 +116,6 @@ class SearchResult
     "#{@gsearch_result_class} #{@title} #{@url} #{@content}"
   end
 
-  
 end
 
 end

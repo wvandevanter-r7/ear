@@ -3,7 +3,7 @@ $:.unshift(File.dirname(__FILE__))
 require '../../../config/environment'
 require 'test/unit'
 
-class TestBing < Test::Unit::TestCase
+class TestBingSearchService < Test::Unit::TestCase
 
   def test_bing_search_acme
     x = Ear::Client::Bing::SearchService.new

@@ -28,6 +28,7 @@ class TaskLogger
 
 private 
   def _log(message) 
+   puts message
    @out.puts message
    @out.flush
   end

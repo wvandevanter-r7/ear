@@ -15,6 +15,32 @@
   <%= @domain.organization_id %>
 </p>
 
+<p>
+<b>Parents:</b>
+  <ul>
+  <% @domain.parents.each {|p|%>
+    <li><%= link_to p, eval("#{p.class.to_s.downcase}_path(p)")  %></li>
+  <% } %>
+  </ul>
+</p>  
+
+<p>
+<b>Children:</b>
+  <ul>
+  <% @domain.children.each {|c|%>
+    <li><%= link_to c, eval("#{c.class.to_s.downcase}_path(c)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Tasks:</b>
+  <ul>
+  <% @domain.tasks.each {|t|%>
+    <li><%= link_to t, eval("#{t.class.to_s.downcase}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
+</p>
 
 <%= link_to 'Edit', edit_domain_path(@domain) %> |
 <%= link_to 'Back', domains_path %>

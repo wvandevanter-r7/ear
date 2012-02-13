@@ -4,7 +4,7 @@ require '../../../config/environment'
 #require '../corpwatch'
 require 'test/unit'
 
-class TestCorpwatch < Test::Unit::TestCase
+class TestCorpwatchService < Test::Unit::TestCase
   
   def test_corpwatch_search_acme
     x = Ear::Client::Corpwatch::CorpwatchService.new

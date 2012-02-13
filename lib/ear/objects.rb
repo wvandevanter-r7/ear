@@ -1,4 +1,4 @@
-#module EAR
+  #module EAR
 
 class Object
 

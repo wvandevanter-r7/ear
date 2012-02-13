@@ -3,7 +3,7 @@ $:.unshift(File.dirname(__FILE__))
 require '../../../config/environment'
 require 'test/unit'
 
-class TestGoogle < Test::Unit::TestCase
+class TestGoogleSearchService < Test::Unit::TestCase
 
   def test_google_search_acme
     x = Ear::Client::Google::SearchService.new

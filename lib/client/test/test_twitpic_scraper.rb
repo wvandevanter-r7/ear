@@ -3,7 +3,7 @@ $:.unshift(File.dirname(__FILE__))
 require '../../../config/environment'
 require 'test/unit'
 
-class TestTwitPic < Test::Unit::TestCase
+class TestTwitPicScraper < Test::Unit::TestCase
 
   def test_twitpic_search_jcran
     x = Ear::Client::TwitPic::TwitPicScraper.new

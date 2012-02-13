@@ -26,6 +26,10 @@ class TaskManager
     #end
   end
 
+  def find_task(task_name)
+    return _find_task_by_name(task_name)
+  end
+
   # 
   # This method allows us to reload our tasks
   #

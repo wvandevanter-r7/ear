@@ -2,18 +2,18 @@ class Task
 
   # Rails model compatibility #
   def self.all
-    TaskManager.tasks
+    TaskManager.instance.tasks
   end
 
-  def self.first
-    TaskManager.tasks[0]
-  end
-
-  def self.find(num)
-    TaskManager.tasks[num]
+  def self.find(name)
+    TaskManager.instance.find_task name
   end
   ## End Rails compatibility ##
 
+  def self.id
+    return self.name
+  end
+  
   attr_accessor :task_logger
 
   # Maintain a constructor that takes no options - all code will be eval'd in
