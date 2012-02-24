@@ -26,7 +26,6 @@ raise ArgumentError, "Please specify interface" unless ARGV[0]
   @excluded.each do |excluded_regex|
       if Regexp.new(excluded_regex).match(packet.ip_daddr.to_s)
         excluded = true
-        puts "Packet in the exclusion list."
         break
       end
   end
@@ -40,5 +39,5 @@ raise ArgumentError, "Please specify interface" unless ARGV[0]
   puts "New host: #{packet.ip_daddr}, creating a record..."
   h = Host.create(:ip_address => packet.ip_daddr)
   h.run_task "geolocate_host"
-  h.run_task "dns_forward_lookup"
+  h.run_task "dns_reverse_lookup"
 end

@@ -25,7 +25,6 @@ raise ArgumentError, "Please specify interface" unless ARGV[0]
   @excluded.each do |excluded_regex|
       if Regexp.new(excluded_regex).match(packet.ip_daddr.to_s)
         excluded = true
-        puts "Packet in the exclusion list."
         break
       end
   end

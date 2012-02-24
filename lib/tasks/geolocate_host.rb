@@ -28,10 +28,10 @@ require 'iconv'
       if loc
         @task_logger.log "adding location for #{@object.ip_address}"
         create_object(PhysicalLocation, { 
-          :zip => loc.postal_code.force_encoding('UTF-8'),
-          :city => loc.city_name.force_encoding('UTF-8'),
-          :state => loc.region_name.force_encoding('UTF-8'),
-          :country => loc.country_name.force_encoding('UTF-8'),
+          :zip => loc.postal_code.encode('UTF-8', :invalid => :replace),
+          :city => loc.city_name.encode('UTF-8', :invalid => :replace),
+          :state => loc.region_name.encode('UTF-8', :invalid => :replace),
+          :country => loc.country_name.encode('UTF-8', :invalid => :replace),
           :longitude => loc.longitude,
           :latitude => loc.latitude})
       end
