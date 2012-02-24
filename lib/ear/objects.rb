@@ -2,20 +2,19 @@
 
 class Object
 
-
   def all
     objects = []
-    objects << Domain.all
-    objects << Finding.all 
-    objects << Host.all
-    objects << NetBlock.all
-    objects << NetSvc.all
-    objects << Organization.all
-    objects << PhysicalLocation.all
-    objects << SearchString.all
-    objects << User.all
-    objects << WebApp.all
-    objects << WebForm.all
+    objects << Domain.all unless Domain.all == [] 
+    objects << Finding.all unless Finding.all == []  
+    objects << Host.all unless Host.all == [] 
+    objects << NetBlock.all unless NetBlock.all == [] 
+    objects << NetSvc.all unless NetSvc.all == []
+    objects << Organization.all unless Organization.all == []
+    objects << PhysicalLocation.all  unless PhysicalLocation.all == []
+    objects << SearchString.all unless SearchString.all == []
+    objects << User.all unless User.all == []
+    objects << WebApp.all unless WebApp.all == []
+    objects << WebForm.all unless WebForm.all == []
   end
 
   def tasks

@@ -23,7 +23,7 @@ gem 'json'
 gem 'exifr'
 
 # Network Services:
-#gem 'pcaprub'
+gem 'pcaprub'
 gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
@@ -43,10 +43,6 @@ gem 'capybara'
 # apt-get install libqt4-dev libqtwebkit-dev
 gem 'capybara-webkit' # Requires QTwebkit
 # gem 'headless'
-
-
-
-
 
 # Gems used only for assets and not required
 # in production environments by default.

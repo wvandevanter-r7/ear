@@ -14,6 +14,7 @@ Ear::Application.routes.draw do
   resources :object_mappings
   resources :users
   resources :organizations
+  resources :maps
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

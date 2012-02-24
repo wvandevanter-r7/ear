@@ -10,7 +10,8 @@ require "packetfu"
 
 raise ArgumentError, "Please specify interface" unless ARGV[0]
 
-@cap = PacketFu::Capture.new(:iface => ARGV[0],
+@cap = PacketFu::Capture.new(
+  :iface => ARGV[0],
   :start => true,
   :filter => "ip")
 
@@ -37,5 +38,7 @@ raise ArgumentError, "Please specify interface" unless ARGV[0]
   next if host
 
   puts "New host: #{packet.ip_daddr}, creating a record..."
-  h = Host.new(:ip_address => packet.ip_daddr)
+  h = Host.create(:ip_address => packet.ip_daddr)
+  h.run_task "geolocate_host"
+  h.run_task "dns_forward_lookup"
 end
