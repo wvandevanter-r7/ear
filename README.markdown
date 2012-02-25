@@ -20,8 +20,8 @@ EAR has a number of external (mainly gem) dependencies. We use bundler to manage
 To set up EAR, run 'bundle install' in the root of the EAR directory.
 
 The EAR is currently tested and working on:
- * OS X 10.5.x+
- * Ubuntu Linux 9.10+  
+* OS X 10.5.x+
+* Ubuntu Linux 9.10+  
 
 ## Getting Started with the EAR
 
@@ -33,7 +33,7 @@ Once you have a database configuration, run the following:
 
 Once you have a database, simply run `$ util/console.rb` - this will give you access to a pry shell from which you can create objects and run tasks. 
 
- - Creating a host object & running tasks: 
+Creating a host object & running tasks: 
 
     ear> h = Host.create(:ip_address => "8.8.8.8")
     ear> h.run_task("dns_reverse_lookup")
