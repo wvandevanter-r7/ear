@@ -20,8 +20,8 @@ EAR has a number of external (mainly gem) dependencies. We use bundler to manage
 To set up EAR, run 'bundle install' in the root of the EAR directory.
 
 The EAR is currently tested and working on:
- - OS X 10.5.x+
- - Ubuntu Linux 9.10+  
+ * OS X 10.5.x+
+ * Ubuntu Linux 9.10+  
 
 ## Getting Started with the EAR
 
@@ -29,16 +29,16 @@ You'll need to configure a database before you can use the app. Do this in ear/c
 
 Once you have a database configuration, run the following:
 
-`$ rake db:create && rake db:migrate`
+    $ rake db:create && rake db:migrate
 
 Once you have a database, simply run `$ util/console.rb` - this will give you access to a pry shell from which you can create objects and run tasks. 
 
  - Creating a host object & running tasks: 
 
-`ear> h = Host.create(:ip_address => "8.8.8.8")
-ear> h.run_task("dns_reverse_lookup")
-ear> h.run_task("geolocate_host")
-ear> h.children`
+    ear> h = Host.create(:ip_address => "8.8.8.8")
+    ear> h.run_task("dns_reverse_lookup")
+    ear> h.run_task("geolocate_host")
+    ear> h.children
 
 You can also access the interface on the web, by running '`$ rails s' in the root of the EAR directory. This will set up a server on :3000 - Note that this is extremely alpha, and is currently not supported. 
 
