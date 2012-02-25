@@ -20,6 +20,7 @@ EAR has a number of external (mainly gem) dependencies. We use bundler to manage
 To set up EAR, run 'bundle install' in the root of the EAR directory.
 
 The EAR is currently tested and working on:
+
 * OS X 10.5.x+
 * Ubuntu Linux 9.10+  
 
