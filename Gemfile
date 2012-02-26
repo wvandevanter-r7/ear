@@ -37,11 +37,13 @@ gem 'flickr'
 gem 'nokogiri'
 
 # Heavy-duty javascript scraping
-gem 'selenium-webdriver'
 gem 'capybara'
+#gem 'akephalos' # headless scraping with capybara
+gem 'selenium-webdriver' # browser based scraping with capybara
+
 # https://github.com/thoughtbot/capybara-webkit#readme
 # apt-get install libqt4-dev libqtwebkit-dev
-# gem 'capybara-webkit' # Requires QTwebkit
+ gem 'capybara-webkit' # Requires QTwebkit
 # gem 'headless'
 
 # Gems used only for assets and not required
@@ -70,9 +72,3 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
-
-group :develop do
-	# Handy debugging
-	gem 'pry'
-end
-
