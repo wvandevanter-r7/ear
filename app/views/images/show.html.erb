@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>local Path:</b>
+  <%= @image.local_path %>
+</p>
+
+<p>
+  <b>Remote Path:</b>
+  <%= @image.remote_path %>
+</p>
+
+
+<p>
+  <b>Image:</b>
+  <img src="<%= request.fullpath << "/../../ear/" << @image.filename  %>">
+</p>
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>

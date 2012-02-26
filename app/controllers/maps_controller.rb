@@ -1,7 +1,7 @@
 class MapsController < ApplicationController
-  # GET /maps
-  # GET /maps.json
-  def index
+  # GET /maps/google_default
+  # GET /maps/google_default.json
+  def google_default
     @loc = PhysicalLocation.all
     
     #f = File.open("#{File.dirname(__FILE__)}/../../public/listing.js","w")
@@ -30,8 +30,12 @@ class MapsController < ApplicationController
   
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @loc }
+      format.json { render json: @json }
     end
+  end
+
+  def index
+    # query a list of all maps
   end
 
 end

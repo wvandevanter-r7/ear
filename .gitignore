@@ -20,3 +20,4 @@ data/geolitecity/latest.dat
 # Ignore all logfiles and tempfiles.
 log/*.log
 tmp
+public/ear/*
