@@ -51,7 +51,10 @@ def run
       @task_logger.log_error "Unable to parse, malformed jpg"
     end
 
-    @task_run.save_raw_result "#{photo.local_path}: #{photo.remote_path}"
+    create_object Image, 
+      :local_path => photo.local_path,
+      :remote_path => photo.remote_path, 
+      :description => "twitpic image"
   end
 end
 

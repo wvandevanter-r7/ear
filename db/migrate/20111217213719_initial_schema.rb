@@ -24,6 +24,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer       :net_svc_id
       t.integer       :web_app_id
       t.integer       :web_form_id
+      t.integer       :image_id
       t.timestamps
     end
 
@@ -55,6 +56,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer       :organization_id
       t.integer       :user_id
       t.integer       :host_id
+      t.integer       :image_id
       t.timestamps
     end
 
@@ -131,6 +133,13 @@ class InitialSchema < ActiveRecord::Migration
       t.string :content
       t.timestamps
     end
-    
+
+    create_table :images do |t|
+      t.string :local_path
+      t.string :remote_path
+      t.string :description
+      t.timestamps
+    end
+
   end
 end

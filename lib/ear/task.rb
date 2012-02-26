@@ -33,8 +33,10 @@ class Task
   def description
     "This is a generic task"
   end
-    
+
+  #
   # Where the pre-run setup happens
+  #
   def setup(object, options={})  
     @object = object
     @options = options
@@ -46,8 +48,10 @@ class Task
       :task_object_id => @object.id, 
       :task_options_hash => @options )
 
+    #
     # This is an AR relationship, so we can go back and access all tasks for 
     # a particular object.
+    #
     @object.task_runs << @task_run
 
     @task_logger.log "Task object: #{@object}"
@@ -55,7 +59,7 @@ class Task
     @task_logger.log "Task run: #{@task_run}"
   end
   
-  # Override!
+  # Override
   def run
   end
   
@@ -72,10 +76,10 @@ class Task
   end
 
 
-  def safe_system(command)
-    puts "UNSAFE DUDE."
-    `#{command}`
-  end
+  #def safe_system(command)
+  #  puts "UNSAFE DUDE."
+  #  `#{command}`
+  #end
 
   #
   # Convenience method that makes it easy to create

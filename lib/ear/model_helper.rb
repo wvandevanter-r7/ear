@@ -2,9 +2,45 @@ module ModelHelper
 
   def self.included(base)
     base.class_eval do
+      #
+      # gangster method_missing magic to automatically create tasks by name
+      #
+
+      #def respond_to?(method,include_private = false)
+      #  TaskManager.instance.get_tasks_for(self).each do |task|
+      #    return true if method =~ Regexp.new(task.name)
+      #  end
+      #  return false
+      #end
+
+      def method_missing(method, *args, &block)
+         call_parent = true
+         TaskManager.instance.get_tasks_for(self).each do |task|
+          puts "checking task #{task}"
+          if method =~ Regexp.new(task.name)
+            #
+            # Run the task, and mark calling super as unnecessary.
+            #
+            task_arguments = args.first || {}
+            self.run_task task.name, task_arguments
+            call_parent = false
+
+            # Define this method, so we don't have to check again
+            # this is like caching the method missing. Should take 
+            # care of a respond_to? call as well. See:
+            # http://www.alfajango.com/blog/method_missing-a-rubyists-beautiful-mistress/
+            self.class.send(:define_method, task.name, *args) do
+              self.run_task task.name, args.first || {}
+              call_parent = false
+            end
+          end
+        end
+        super if call_parent
+      end
+      # end method_missing magic
 
       def to_s
-        "#{self.class}: #{name}"
+        "#{self.class} #{self.name}"
       end
       
       #

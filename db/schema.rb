@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.datetime "updated_at"
   end
 
+  create_table "images", :force => true do |t|
+    t.string   "local_path"
+    t.string   "remote_path"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "net_blocks", :force => true do |t|
     t.integer  "domain_id"
     t.string   "range"
@@ -86,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "organization_id"
     t.integer  "user_id"
     t.integer  "host_id"
+    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -120,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "net_svc_id"
     t.integer  "web_app_id"
     t.integer  "web_form_id"
+    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

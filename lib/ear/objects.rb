@@ -15,6 +15,8 @@ class Object
     objects << User.all unless User.all == []
     objects << WebApp.all unless WebApp.all == []
     objects << WebForm.all unless WebForm.all == []
+    
+    objects
   end
 
   def tasks
