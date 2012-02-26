@@ -84,10 +84,15 @@ class Task
   end
 
 
-  #def safe_system(command)
-  #  puts "UNSAFE DUDE."
-  #  `#{command}`
-  #end
+  def safe_system(command)
+    @task_logger.log_error "UNSAFE SYSTEM CALL DUDE."
+  
+    if command =~ /(\||\;)/
+      raise "Illegal character"
+    end
+    
+    `#{command}`
+  end
 
   #
   # Convenience method that makes it easy to create

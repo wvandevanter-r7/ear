@@ -82,6 +82,7 @@ class InitialSchema < ActiveRecord::Migration
     create_table :net_blocks do |t|
       t.integer :domain_id
       t.string :range
+      t.string :description
       t.timestamps
     end
 
@@ -95,10 +96,12 @@ class InitialSchema < ActiveRecord::Migration
     create_table      :search_strings do |t|
       t.integer       :metric
       t.string        :name
+      t.string        :description
       t.timestamps
     end
 
     create_table :net_svcs do |t|
+      t.string        :name
       t.integer       :metric
       t.integer       :host_id
       t.string        :fingerprint

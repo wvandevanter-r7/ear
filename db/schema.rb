@@ -49,11 +49,13 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   create_table "net_blocks", :force => true do |t|
     t.integer  "domain_id"
     t.string   "range"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "net_svcs", :force => true do |t|
+    t.string   "name"
     t.integer  "metric"
     t.integer  "host_id"
     t.string   "fingerprint"
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   create_table "search_strings", :force => true do |t|
     t.integer  "metric"
     t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

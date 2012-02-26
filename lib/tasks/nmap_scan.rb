@@ -32,7 +32,7 @@ def run
     raise ArgumentError, "Unknown object type"
   end
   
-  rand_file_path = "/tmp/nmap_scan_#{to_scan}_#{rand(100000000)}.xml"
+  rand_file_path = "#{Dir::tmpdir}/nmap_scan_#{to_scan}_#{rand(100000000)}.xml"
   
   # shell out to nmap and run the scan
   @task_logger.log "scanning #{to_scan} and storing in #{rand_file_path}"
@@ -61,6 +61,7 @@ def run
       @task_logger.log "Creating Services"
       
       create_object(NetSvc, {
+        :host_id => @object.id,
         :port_num => port.num,
         :proto => port.proto,
         :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})

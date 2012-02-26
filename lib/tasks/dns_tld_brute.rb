@@ -53,7 +53,7 @@ def run
     'sj', 'sk', 'sl', 'sm', 'sn', 'so', 'sr', 'st', 'su', 'sv', 'sy', 'sz', 'tc', 'td', 'tel',
     'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tp', 'tr', 'tt', 'tv',
     'tw', 'tz', 'ua', 'ug', 'uk', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu',
-    'wf', 'ws', 'ye', 'yt', 'za', 'zm', 'zw']
+    'wf', 'ws', 'xxx', 'ye', 'yt', 'za', 'zm', 'zw']
   end
 =end
 
@@ -62,7 +62,7 @@ def run
   else
     gtld_list = ['co', 'co.uk', 'com' ,'net', 'biz', 'org', 'int', 'mil', 'edu',
     'biz', 'info', 'name', 'pro', 'aero', 'coop', 'museum', 'asia', 'cat', 'jobs',
-    'mobi', 'tel', 'travel', 'arpa', 'gov', "us", "cn", "to"]
+    'mobi', 'tel', 'travel', 'arpa', 'gov', "us", "cn", "to", "xxx"]
   end
 
   @task_logger.log "Using gtld list: #{gtld_list}"
@@ -74,9 +74,9 @@ def run
 
         if @object.class == Domain
           # get only the basename
-          basename = @object.name.split(".")[0..-2].join(".") 
+          basename = @object.name.split(".")[0..-2].join(".").gsub(" ","")
         else
-          basename = @object.name
+          basename = @object.name.gsub(" ", "")
         end
         
         # Calculate the domain name
@@ -93,11 +93,9 @@ def run
           h = create_object(Host, {:ip_address => resolved_address})
           
           # Associate our host and domain objects.
-          d.organization = @object if @object.kind_of? Organization
-          d.organzation = @object.organization if @object.kind_of? Organization
-
           d.hosts << h
           h.domains << d
+          d.organization = @object if @object.kind_of? Organization
         end
 
         @task_run.save_raw_result "#{domain}: resolved_address"
