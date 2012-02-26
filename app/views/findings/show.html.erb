@@ -10,6 +10,33 @@
   <%= @finding.content %>
 </p>
 
+<p>
+<b>Parents:</b>
+  <ul>
+  <% @finding.parents.each {|p|%>
+    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+  <% } %>
+  </ul>
+</p>  
+
+<p>
+<b>Children:</b>
+  <ul>
+  <% @finding.children.each {|c|%>
+    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Tasks:</b>
+  <ul>
+  <% @finding.tasks.each {|t|%>
+    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
 
 <%= link_to 'Edit', edit_finding_path(@finding) %> |
 <%= link_to 'Back', findings_path %>

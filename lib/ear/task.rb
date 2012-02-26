@@ -8,17 +8,25 @@ class Task
   def self.find(name)
     TaskManager.instance.find_task name
   end
-  ## End Rails compatibility ##
+  
+  def self.model_name
+    "task"
+  end 
 
   def self.id
     return self.name
   end
-  
+  # End Rails compatibility #
+ 
   attr_accessor :task_logger
 
   # Maintain a constructor that takes no options - all code will be eval'd in
   def initialize
     @task_logger = TaskLogger.new name
+  end
+
+  def underscore
+    "task"
   end
 
   # Returns an array of valid types for this task

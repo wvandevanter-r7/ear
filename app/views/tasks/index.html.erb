@@ -3,13 +3,19 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>&nbsp;</th>
     <th>Accepts</th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr>
-    <td><%= task.name %></td>
-    <td><%= x =[]; task.allowed_types.each {|t| x << t.name};x  %> </td>
+    <td><%= link_to task.name, task_path(task.name) %></td>
+    <td>&nbsp;</td>
+    <td>
+      <% x=[]; task.allowed_types.each do |t|  %>
+       <%= link_to(t, t) %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>

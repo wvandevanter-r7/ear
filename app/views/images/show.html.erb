@@ -11,11 +11,38 @@
   <%= @image.remote_path %>
 </p>
 
+<p>
+<b>Parents:</b>
+  <ul>
+  <% @image.parents.each {|p|%>
+    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+  <% } %>
+  </ul>
+</p>  
 
 <p>
-  <b>Image:</b>
+<b>Children:</b>
+  <ul>
+  <% @image.children.each {|c|%>
+    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Tasks:</b>
+  <ul>
+  <% @domain.tasks.each {|t|%>
+    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
   <img src="<%= request.fullpath << "/../../ear/" << @image.filename  %>">
 </p>
+
+
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>

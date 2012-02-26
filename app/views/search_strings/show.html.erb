@@ -5,6 +5,32 @@
   <%= @search_string.name %>
 </p>
 
+<p>
+<b>Parents:</b>
+  <ul>
+  <% @search_string.parents.each {|p|%>
+    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+  <% } %>
+  </ul>
+</p>  
+
+<p>
+<b>Children:</b>
+  <ul>
+  <% @search_string.children.each {|c|%>
+    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Tasks:</b>
+  <ul>
+  <% @search_string.tasks.each {|t|%>
+    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
+</p>
 
 <%= link_to 'Edit', edit_search_string_path(@search_string) %> |
 <%= link_to 'Back', search_strings_path %>

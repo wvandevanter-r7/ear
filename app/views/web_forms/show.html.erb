@@ -16,5 +16,32 @@
 </p>
 
 
+<p>
+<b>Parents:</b>
+  <ul>
+  <% @web_form.parents.each {|p|%>
+    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+  <% } %>
+  </ul>
+</p>  
+
+<p>
+<b>Children:</b>
+  <ul>
+  <% @web_form.children.each {|c|%>
+    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Tasks:</b>
+  <ul>
+  <% @web_form.tasks.each {|t|%>
+    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_web_form_path(@web_form) %> |
 <%= link_to 'Back', web_forms_path %>

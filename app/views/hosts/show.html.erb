@@ -1,8 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Ip address:</b>
+  <b>IP address:</b>
   <%= @host.ip_address %>
+</p>
+
+<p>
+<b>Parents:</b>
+  <ul>
+  <% @host.parents.each {|p|%>
+    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+  <% } %>
+  </ul>
+</p>  
+
+<p>
+<b>Children:</b>
+  <ul>
+  <% @host.children.each {|c|%>
+    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Tasks:</b>
+  <ul>
+  <% @host.tasks.each {|t|%>
+    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_host_path(@host) %> |

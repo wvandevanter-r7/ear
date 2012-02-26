@@ -43,6 +43,11 @@ module ModelHelper
         "#{self.class} #{self.name}"
       end
       
+      def underscore
+        ActiveSupport::Inflector.underscore self.class
+      end
+      
+      
       #
       # This method lets you query the available tasks for this object type
       #

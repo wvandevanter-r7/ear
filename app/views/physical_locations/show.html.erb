@@ -35,6 +35,32 @@
   <%= @physical_location.longitude %>
 </p>
 
+<p>
+<b>Parents:</b>
+  <ul>
+  <% @physical_location.parents.each {|p|%>
+    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+  <% } %>
+  </ul>
+</p>  
+
+<p>
+<b>Children:</b>
+  <ul>
+  <% @physical_location.children.each {|c|%>
+    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Tasks:</b>
+  <ul>
+  <% @physical_location.tasks.each {|t|%>
+    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
+</p>
 
 <%= link_to 'Edit', edit_physical_location_path(@physical_location) %> |
 <%= link_to 'Back', physical_locations_path %>
