@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>String</th>
     <th>Content</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @findings.each do |finding| %>
   <tr>
-    <td><%= finding.string %></td>
     <td><%= finding.content %></td>
     <td><%= link_to 'Show', finding %></td>
     <td><%= link_to 'Edit', edit_finding_path(finding) %></td>
