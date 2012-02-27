@@ -6,6 +6,7 @@
     <th>Task object</th>
     <th>Task object type</th>
     <th>Task options hash</th>
+    <th>Task result count</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= task_run.task_object_id %></td>
     <td><%= task_run.task_object_type %></td>
     <td><%= task_run.task_options_hash %></td>
+    <td><%= task_run.task_results.count %></td>
     <td><%= link_to 'Show', task_run %></td>
     <td><%= link_to 'Edit', edit_task_run_path(task_run) %></td>
     <td><%= link_to 'Destroy', task_run, confirm: 'Are you sure?', method: :delete %></td>

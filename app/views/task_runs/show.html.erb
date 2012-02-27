@@ -20,6 +20,13 @@
   <%= @task_run.task_options_hash %>
 </p>
 
+<p>
+  <b> Task Results:</b> <br/>
+  <%@task_run.task_results.each do |x| %>
+    <%= x.name + ": " + x.content %> <br/>
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_task_run_path(@task_run) %> |
 <%= link_to 'Back', task_runs_path %>

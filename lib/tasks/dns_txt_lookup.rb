@@ -11,7 +11,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Host, Domain]
+  [Domain]
 end
 
 def setup(object, options={})
@@ -36,10 +36,18 @@ def run
 
       # TODO - Parse for netbocks and hostnames
 
+#     res_answer.downcase.split("ipv4").
+#     create_object NetBlock, :range
+
+      create_object Finding, :name => "dns_txt_lookup", :content => res_answer.answer
+
+      # save the raw result
+      @task_run.save_raw_result res_answer.to_s
     end
 
-    @task_run.save_raw_result res_answer.to_s
-
+    
+    
+    
   rescue Dnsruby::Refused
     @task_logger.log "Zone Transfer against #{@object.name} refused."
 
