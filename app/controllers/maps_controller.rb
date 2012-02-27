@@ -11,15 +11,26 @@ class MapsController < ApplicationController
       display  = ""
       
       loc.parents.each do |x|
-      
-        if x.class == Host
-          display = x.to_s
+        if x.kind_of? Host
+          display = "<a href=\"http://localhost:3000/hosts/#{x.id}\">#{x.to_s}</a><br/>"
+        elsif x.kind_of? Domain
+          display = "<a href=\"http://localhost:3000/domains/#{x.id}\">#{x.to_s}</a><br/>"
+        elsif x.kind_of? PhysicalLocation
+          display = "<a href=\"http://localhost:3000/physical_locations/#{x.id}\">#{x.to_s}</a><br/>"
         else
           display = x.to_s
         end
         
         x.children.each do |y|
-          display << " / " << y.to_s
+          if y.kind_of? Host
+            display << "<a href=\"http://localhost:3000/hosts/#{y.id}\">#{y.to_s}</a><br/>"
+          elsif y.kind_of? Domain
+            display << "<a href=\"http://localhost:3000/domains/#{y.id}\">#{y.to_s}</a><br/>"
+          elsif y.kind_of? PhysicalLocation
+            display << "<a href=\"http://localhost:3000/physical_locations/#{y.id}\">#{y.to_s}</a><br/>"
+          else
+            display << y.to_s
+          end
         end
       end
       

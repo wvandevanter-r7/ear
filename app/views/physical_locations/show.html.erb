@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <b>Address:</b>
   <%= @physical_location.address %>
@@ -36,6 +37,18 @@
 </p>
 
 <p>
+  <b>Google Map:</b><br/>
+<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=@physical_location.latitude%>,<%=@physical_location.longitude%>&zoom=10&size=200x200&sensor=false"><br/>
+<p>
+
+<p>
+  <b>Street View:</b><br/>
+<img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@physical_location.latitude%>,<%=@physical_location.longitude%>&heading=0&sensor=false">
+<img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@physical_location.latitude%>,<%=@physical_location.longitude%>&heading=90&sensor=false">
+<p><img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@physical_location.latitude%>,<%=@physical_location.longitude%>&heading=180&sensor=false">
+<img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@physical_location.latitude%>,<%=@physical_location.longitude%>&heading=270&sensor=false">
+</p>
+
 <b>Parents:</b>
   <ul>
   <% @physical_location.parents.each {|p|%>

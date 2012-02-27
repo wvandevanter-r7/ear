@@ -13,7 +13,7 @@
 
   <script type="text/javascript">
   
-    <%= @json %>
+    <%= @json.to_s.html_safe %>
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 2,

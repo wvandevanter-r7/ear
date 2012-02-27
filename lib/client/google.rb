@@ -26,7 +26,7 @@ class SearchScraper
     def initialize
       Capybara.run_server = false
       Capybara.default_selector = :xpath
-      Capybara.current_driver = :webkit
+      Capybara.current_driver = :akephalos
       Capybara.app_host = "http://www.google.com/"
     end
     
