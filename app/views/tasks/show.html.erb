@@ -10,6 +10,19 @@
   <%= @task.description %>
 </p>
 
+<p>
+  <b>Objects:</b>
+  <form id="task_runner" action="/task_runner">
+  <% Object.all.each do |o|
+     next unless o.tasks.include? @task
+     r = "#{o.class.to_s.downcase}_#{o.id}"
+   %>
+    <input id="<%=r%>" type="checkbox" name="<%=r%>" value="<%=r%>" /><%=o%><br/>
+  <% end %>
+  <input id="submit" type="submit" />
+  </form>
+  </p>
+
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

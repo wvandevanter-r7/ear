@@ -4,17 +4,17 @@ class Object
 
   def all
     objects = []
-    objects << Domain.all unless Domain.all == [] 
-    objects << Finding.all unless Finding.all == []  
-    objects << Host.all unless Host.all == [] 
-    objects << NetBlock.all unless NetBlock.all == [] 
-    objects << NetSvc.all unless NetSvc.all == []
-    objects << Organization.all unless Organization.all == []
-    objects << PhysicalLocation.all  unless PhysicalLocation.all == []
-    objects << SearchString.all unless SearchString.all == []
-    objects << User.all unless User.all == []
-    objects << WebApp.all unless WebApp.all == []
-    objects << WebForm.all unless WebForm.all == []
+    Domain.all.each {|x| objects << x } unless Domain.all == [] 
+    Finding.all.each {|x| objects << x }  unless Finding.all == []  
+    Host.all.each {|x| objects << x }  unless Host.all == [] 
+    NetBlock.all.each {|x| objects << x }  unless NetBlock.all == [] 
+    NetSvc.all.each {|x| objects << x }  unless NetSvc.all == []
+    Organization.all.each {|x| objects << x }  unless Organization.all == []
+    PhysicalLocation.all.each {|x| objects << x }   unless PhysicalLocation.all == []
+    SearchString.all.each {|x| objects << x }  unless SearchString.all == []
+    User.all.each {|x| objects << x }  unless User.all == []
+    WebApp.all.each {|x| objects << x }  unless WebApp.all == []
+    WebForm.all.each {|x| objects << x }  unless WebForm.all == []
     
     objects
   end
