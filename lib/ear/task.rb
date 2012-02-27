@@ -8,6 +8,11 @@ class Task
   def self.find(name)
     TaskManager.instance.find_task name
   end
+
+  def self.find_by_name(name)
+    TaskManager.instance.find_task name
+  end
+
   
   def self.model_name
     "task"

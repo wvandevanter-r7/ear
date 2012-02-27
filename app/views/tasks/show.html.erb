@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
+<script>
+function check(field) {
+  for (i = 0; i < field.length; i++) {
+    if(field[i].checked == true)
+      field[i].checked = false;
+    else
+      field[i].checked = true;
+  }
+}
+</script>
 
 <p>
   <b>Name:</b>
@@ -11,17 +21,24 @@
 </p>
 
 <p>
-  <b>Objects:</b>
-  <form id="task_runner" action="/task_runner">
+  <b>Objects:</b><br/>
+  <form name="task_runner" id="task_runner" action="/task_runner/run" method="POST"> 
+  <input type="hidden" name="task_name" id="task_name" value="<%=@task.name%>"><br/>
+  <input type="checkbox" name="Toggle" value="Toggle" onClick="check(document.task_runner)"><br/>
   <% Object.all.each do |o|
      next unless o.tasks.include? @task
-     r = "#{o.class.to_s.downcase}_#{o.id}"
+     r = "#{o.class.to_s.downcase}##{o.id}"
    %>
-    <input id="<%=r%>" type="checkbox" name="<%=r%>" value="<%=r%>" /><%=o%><br/>
+    <input id="<%=r%>" type="checkbox" name="objects[<%=r%>]" /><%=o%><br/>
+    
   <% end %>
-  <input id="submit" type="submit" />
+  <input id="submit" type="submit" /><br/>
   </form>
   </p>
+
+
+
+
 
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

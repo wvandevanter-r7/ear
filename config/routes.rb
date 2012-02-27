@@ -1,4 +1,5 @@
 Ear::Application.routes.draw do
+  
   resources :images
   resources :net_blocks
   resources :findings
@@ -19,6 +20,9 @@ Ear::Application.routes.draw do
   # handle maps
   match "/maps" => "maps#index"
   match "/maps/google_default"
+
+  # running tasks
+  post "task_runner/run"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
