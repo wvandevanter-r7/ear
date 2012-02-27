@@ -16,6 +16,8 @@ Ear::Application.routes.draw do
   resources :task_runs
   resources :task_results
   resources :object_mappings
+
+  match "/" => "objects#index"
   
   # handle maps
   match "/maps" => "maps#index"
