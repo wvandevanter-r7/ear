@@ -1,9 +1,7 @@
 Ear::Application.routes.draw do
   resources :images
-  resources :tasks
   resources :net_blocks
   resources :findings
-  resources :task_results
   resources :web_apps
   resources :web_forms
   resources :net_svcs
@@ -11,12 +9,13 @@ Ear::Application.routes.draw do
   resources :search_strings
   resources :domains
   resources :hosts
-  resources :task_runs
-  resources :object_mappings
   resources :users
   resources :organizations
-
-
+  resources :tasks
+  resources :task_runs
+  resources :task_results
+  resources :object_mappings
+  
   # handle maps
   match "/maps" => "maps#index"
   match "/maps/google_default"
