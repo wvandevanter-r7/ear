@@ -12,22 +12,22 @@ class MapsController < ApplicationController
       
       loc.parents.each do |x|
         if x.kind_of? Host
-          display = "<a href=\"http://localhost:3000/hosts/#{x.id}\">#{x.to_s}</a><br/>"
+          display = "<a href=\"#{request.url}/../../hosts/#{x.id}\">#{x.to_s}</a><br/>"
         elsif x.kind_of? Domain
-          display = "<a href=\"http://localhost:3000/domains/#{x.id}\">#{x.to_s}</a><br/>"
+          display = "<a href=\"#{request.url}/../../domains/#{x.id}\">#{x.to_s}</a><br/>"
         elsif x.kind_of? PhysicalLocation
-          display = "<a href=\"http://localhost:3000/physical_locations/#{x.id}\">#{x.to_s}</a><br/>"
+          display = "<a href=\"#{request.url}/../../physical_locations/#{x.id}\">#{x.to_s}</a><br/>"
         else
           display = x.to_s
         end
         
         x.children.each do |y|
           if y.kind_of? Host
-            display << "<a href=\"http://localhost:3000/hosts/#{y.id}\">#{y.to_s}</a><br/>"
+            display << "<a href=\"#{request.url}/../../hosts/#{y.id}\">#{y.to_s}</a><br/>"
           elsif y.kind_of? Domain
-            display << "<a href=\"http://localhost:3000/domains/#{y.id}\">#{y.to_s}</a><br/>"
+            display << "<a href=\"#{request.url}/../../domains/#{y.id}\">#{y.to_s}</a><br/>"
           elsif y.kind_of? PhysicalLocation
-            display << "<a href=\"http://localhost:3000/physical_locations/#{y.id}\">#{y.to_s}</a><br/>"
+            display << "<a href=\"#{request.url}/../../physical_locations/#{y.id}\">#{y.to_s}</a><br/>"
           else
             display << y.to_s
           end
