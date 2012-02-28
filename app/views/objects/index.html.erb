@@ -1,14 +1,13 @@
 <h1>Listing objects</h1>
-
 <table>
   <tr>
     <th>Object</th>
   </tr>
-
-<% @objects.each do |object| %>
+  
+  <% @objects.each do |o| %>
   <tr>
-    <td><%= object %></td>
+    <td><a href="<%=request.url%>/../../<%=o.underscore%>s/<%=o.id%>"> <%=o.to_s%></a><br/></td>
   </tr>
-<% end %>
+  <% end %>
 </table>
 

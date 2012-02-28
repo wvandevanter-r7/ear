@@ -19,7 +19,7 @@
 <b>Parents:</b>
   <ul>
   <% @domain.parents.each {|p|%>
-    <li><%= link_to p, eval("#{p.class.to_s.downcase}_path(p)")  %></li>
+    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
   <% } %>
   </ul>
 </p>  
@@ -28,7 +28,7 @@
 <b>Children:</b>
   <ul>
   <% @domain.children.each {|c|%>
-    <li><%= link_to c, eval("#{c.class.to_s.downcase}_path(c)")  %></li>
+    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -37,7 +37,7 @@
 <b>Tasks:</b>
   <ul>
   <% @domain.tasks.each {|t|%>
-    <li><%= link_to t, eval("#{t.class.to_s.downcase}_path(t.name)")  %></li>
+    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
   <% } %>
   </ul>
 </p>

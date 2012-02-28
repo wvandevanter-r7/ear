@@ -8,7 +8,7 @@ class ObjectMapping < ActiveRecord::Base
         eval "#{child_type}.find #{child_id}"
       rescue ActiveRecord::RecordNotFound => e
         EarLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}"
-        false
+        []
       end
       
     end
@@ -20,7 +20,7 @@ class ObjectMapping < ActiveRecord::Base
         eval "#{parent_type}.find #{parent_id}"
       rescue ActiveRecord::RecordNotFound => e
         EarLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}"
-        false
+        []
       end
     
     end
