@@ -68,13 +68,10 @@ def run
       driver.navigate.to browse_location
       driver.save_screenshot save_location
 
-      #@taskon_run.save_raw_result(Base64.encode64(File.open(save_location,"r").read), "Image")
-
       create_object Image, 
         :local_path => save_location,
         :remote_path => browse_location, 
         :description => "screenshot"
-
     end
     
     #
@@ -84,8 +81,6 @@ def run
 
   rescue Timeout::Error
     @task_logger.log "Timeout!"
-  #rescue Exception => e
-  #  @task_logger.log "Caught Exception: #{e}"
   end
   
 end

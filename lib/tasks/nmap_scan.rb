@@ -57,26 +57,18 @@ def run
 
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
-      
-      @task_logger.log "Creating Services"
-      
+      @task_logger.log "Creating Service: #{port}"
       create_object(NetSvc, {
         :host_id => @object.id,
         :port_num => port.num,
         :proto => port.proto,
         :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
-      
+      end
+      # reset this back to the main task object & loop
+      @object = master_object
     end
-    
-    # reset this back to the main task object & loop
-    @object = master_object
+  
   end
-
-  puts
-  end
-
-  # Keep track of our raw data  
-  @task_run.save_raw_result(File.open(rand_file_path).read)
 end
 
 def cleanup

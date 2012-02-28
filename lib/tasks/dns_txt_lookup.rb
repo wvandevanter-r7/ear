@@ -42,7 +42,7 @@ def run
       create_object Finding, :name => "dns_txt_lookup", :content => res_answer.answer
 
       # save the raw result
-      @task_run.save_raw_result res_answer.to_s
+      #@task_run.save_raw_result res_answer.to_s
     end
 
     

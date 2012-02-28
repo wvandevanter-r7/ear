@@ -33,7 +33,7 @@ def run
       d.hosts << @object # add this host as an address
 
       # Save the raw data
-      @task_run.save_raw_result resolved_name.to_s
+      #@task_run.save_raw_result resolved_name.to_s
 
     else
       @task_logger.log "Unable to find a name for #{@object.ip_address}"

@@ -1,5 +1,4 @@
 class NetBlock < ActiveRecord::Base
-
   after_save   :log
 
   include ModelHelper

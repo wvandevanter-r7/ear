@@ -10,3 +10,9 @@ end
 
 # Intialize the API database
 require Rails.root + 'lib/ear/ear_api_keys.rb'
+
+
+# Task Manager Setup
+TaskManager.instance.load_tasks
+
+# Object Manager Setup

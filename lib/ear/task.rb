@@ -6,13 +6,12 @@ class Task
   end
 
   def self.find(name)
-    TaskManager.instance.find_task name
+    TaskManager.instance.find_by_name name
   end
 
   def self.find_by_name(name)
-    TaskManager.instance.find_task name
+    TaskManager.instance.find_by_name name
   end
-
   
   def self.model_name
     "task"
@@ -24,6 +23,7 @@ class Task
   # End Rails compatibility #
  
   attr_accessor :task_logger
+  attr_accessor :task_run
 
   # Maintain a constructor that takes no options - all code will be eval'd in
   def initialize
@@ -34,7 +34,10 @@ class Task
     "task"
   end
 
-  # Returns an array of valid types for this task
+  def full_path
+    __FILE__
+  end
+
   def allowed_types
     []
   end
@@ -48,12 +51,25 @@ class Task
   end
 
   #
-  # Where the pre-run setup happens
+  # Override me
   #
-  def setup(object, options={})  
-    @object = object
-    @options = options
+  def setup(object, options={})
+    #
+    # Set the task logger's name (if we don't do this, we're stuck with the
+    # logger thinking it's a generic task going forward - TODO - consider 
+    # finding a more clean way to do this
+    #
+    @task_logger.name = self.name
 
+
+    @object = object # the object we're operating on
+    @options = options # the options for this task
+    @results = [] # temporary collection of all created objects
+
+    #
+    # Create a new task run to record the fact that we've begun running
+    # this task.
+    #
     @task_run = TaskRun.create(
       :name => name,
       :type => nil,
@@ -67,17 +83,26 @@ class Task
     #
     @object.task_runs << @task_run
 
+    #
+    # Do a little logging. do it for the children.
+    #
+    @task_logger.log "Setup called."
     @task_logger.log "Task object: #{@object}"
     @task_logger.log "Task options: #{@options}"
     @task_logger.log "Task run: #{@task_run}"
   end
   
-  # Override
+  #
+  # Override me
+  #
   def run
   end
   
-  # Basic cleanup method
+  #
+  # Override me baby
+  #
   def cleanup
+    @task_logger.log "Cleanup called." 
   end
   
   # Checks for validity
@@ -88,7 +113,9 @@ class Task
     "#{name}: #{description}"
   end
 
-
+  #
+  # Convenience Method - do not override
+  #
   def safe_system(command)
     @task_logger.log_error "UNSAFE SYSTEM CALL DUDE."
   
@@ -110,23 +137,29 @@ class Task
   #
   def create_object(type, params, current_object=@object)
     @task_logger.log "Creating new object of type: #{type}"
-
+    #
     # Call the create method for this type
+    #
     new_object = type.send(:create, params)
-
+    #
     # Check for dupes & return right away if this doesn't save a new
     # object. This should prevent the object mapping from getting created.
+    #
     if new_object.save
       @task_logger.log_good "Created new object: #{new_object}"
+      @results << [new_object,true]
     else
       @task_logger.log "Could not save object, are you sure it's valid & doesn't already exist?"
       new_object = find_object type, params
+      @results << [new_object,false]
     end
-
+    #
     # If we have a new object, then we should keep track of the information
     # that created this object
+    #    
     @task_logger.log "Associating #{current_object} with #{new_object}"
     current_object.associate_child({:child => new_object, :task_run => @task_run})
+
   new_object
   end
 
@@ -145,7 +178,6 @@ class Task
     end
   end
 
-
   # 
   # Run the task. Convenience method. Do not override
   #
@@ -157,9 +189,21 @@ class Task
 
     self.setup(object, options)
     self.run
-    self.cleanup
+    self.cleanup 
+    
+    # RECORD RESULTS. g.h.e.t.t.o, but hey better than previous attempts
+    @task_logger.log "Recording results"
+    @task_run.task_result_hash = {}
+     @results.each do |result|
+      @task_run.task_result_hash["#{result.first.class.to_s}_#{result.first.id.to_s}"] = result.last
+    end
+    @task_run.save
+    @task_logger.log "done recording"
+    # End recording of results
 
-  true
+   
+  #return the task run id
+  @task_run
   end
 
 end

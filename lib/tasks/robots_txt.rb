@@ -28,8 +28,6 @@ def setup(object, options={})
     contents = open("#{url}").read.force_encoding('UTF-8')
 
     # TODO - parse & use the lines as seed paths
-
-    @task_run.save_raw_result contents
     
   rescue OpenURI::HTTPError => e
     @task_logger.log "Unable to connect: #{e}"

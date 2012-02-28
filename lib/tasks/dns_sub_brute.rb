@@ -71,7 +71,7 @@ def run
 
       end
 
-      @task_run.save_raw_result  "#{domain}: #{resolved_address}"
+      #@task_run.save_raw_result  "#{domain}: #{resolved_address}"
 
     rescue Exception => e
       @task_logger.log_error "Hit exception: #{e}"

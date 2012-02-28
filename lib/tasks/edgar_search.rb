@@ -38,7 +38,7 @@ def run
       )
   end
   
-  @task_run.save_raw_result corps.to_s
+  #@task_run.save_raw_result corps.to_s
 
   # Queue a detailed search
   TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})

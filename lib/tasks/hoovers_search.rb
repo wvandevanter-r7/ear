@@ -51,8 +51,6 @@ def run
       TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
 
     end
-
-    @task_run.save_raw_result doc.to_s
   rescue Exception => e
     @task_logger.log_error "Caught Exception: #{e}"
   end

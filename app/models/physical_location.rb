@@ -1,7 +1,6 @@
 class PhysicalLocation < ActiveRecord::Base
   belongs_to    :organization
   has_many      :task_runs
-  has_many      :task_results, :through => :task_runs
 
   after_save    :log
 

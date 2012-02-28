@@ -34,7 +34,6 @@ def run
       :organization => @object.organization }
   end
 
-  @task_run.save_raw_result results.to_s
 end
 
 def cleanup

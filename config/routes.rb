@@ -13,8 +13,7 @@ Ear::Application.routes.draw do
   resources :users
   resources :organizations
   resources :tasks
-  resources :task_runs
-  resources :task_results
+  resources :task_runs 
   resources :object_mappings
 
   match "/" => "objects#index"
@@ -25,6 +24,7 @@ Ear::Application.routes.draw do
 
   # running tasks
   post "task_runner/run"
+  post "task_runner/view"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

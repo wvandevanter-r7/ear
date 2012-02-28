@@ -75,7 +75,7 @@ def run
 
             # Record keeping
             @task_logger.log_good "Zone Tranfer Succeeded on #{@object.name}"
-            @task_run.save_raw_result zone.to_s
+            #@task_run.save_raw_result zone.to_s
 
           end
 

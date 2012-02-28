@@ -109,20 +109,12 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.datetime "updated_at"
   end
 
-  create_table "task_results", :force => true do |t|
-    t.string   "name"
-    t.string   "type"
-    t.text     "content"
-    t.integer  "task_run_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "task_runs", :force => true do |t|
     t.string   "name"
     t.integer  "task_object_id"
     t.string   "task_object_type"
     t.text     "task_options_hash"
+    t.text     "task_result_hash"
     t.integer  "object_mapping_id"
     t.integer  "organization_id"
     t.integer  "physical_location_id"

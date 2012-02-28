@@ -30,7 +30,7 @@ def run
         h.domains << @object
         
         # save the raw data
-        @task_run.save_raw_result resolved_address
+        #@task_run.save_raw_result resolved_address
 
       else
         @task_logger.log "Unable to find address for #{@object.name}"

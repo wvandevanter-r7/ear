@@ -3,7 +3,6 @@ class Host < ActiveRecord::Base
   has_many     :domains
   has_many     :physical_locations
   has_many     :task_runs
-  has_many     :task_results, :through => :task_runs
   
   validates_uniqueness_of :ip_address
   validates_presence_of   :ip_address

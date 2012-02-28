@@ -28,8 +28,6 @@ def run
   results.each do |result|
     o = create_object Domain, { :name => result.visible_url }
   end
-
-  @task_run.save_raw_result results.to_s
 end
 
 def cleanup

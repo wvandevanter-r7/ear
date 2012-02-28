@@ -32,7 +32,7 @@ def run
     :country => corps.first.country })
 
   # Save off our raw data
-  @task_run.save_raw_result corps.join(" ")
+  #@task_run.save_raw_result corps.join(" ")
 
 end
 

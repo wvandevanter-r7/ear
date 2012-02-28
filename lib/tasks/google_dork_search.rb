@@ -49,11 +49,7 @@ def run
       # need someway to represent a page? 
       
       #or vulnerability
-      
-      # For now, just stick it on the task object - creating a specific object
-      # is gonna take a little more thought
-      @task_run.save_raw_result result.to_s
-      
+
     end
   end
 

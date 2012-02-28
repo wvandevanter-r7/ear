@@ -33,8 +33,6 @@ def run
       puts result.content
       puts result.url
     end
-
-    @task_run.save_raw_result results.to_s
   end
 end
 

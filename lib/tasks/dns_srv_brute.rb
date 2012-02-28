@@ -86,7 +86,7 @@ def run
           h.net_svcs << create_object(NetSvc, {:type => "tcp", :port => port, :host => h})
 
           # Save the raw content of our query
-          @task_run.save_raw_result rec.to_s
+          #@task_run.save_raw_result rec.to_s
         end
 
       end

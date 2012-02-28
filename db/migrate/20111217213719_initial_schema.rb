@@ -15,6 +15,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer       :task_object_id
       t.string        :task_object_type
       t.text          :task_options_hash
+      t.text          :task_result_hash
       t.integer       :object_mapping_id
       t.integer       :organization_id
       t.integer       :physical_location_id
@@ -25,14 +26,6 @@ class InitialSchema < ActiveRecord::Migration
       t.integer       :web_app_id
       t.integer       :web_form_id
       t.integer       :image_id
-      t.timestamps
-    end
-
-    create_table :task_results do |t|
-      t.string        :name
-      t.string        :type
-      t.text          :content
-      t.integer       :task_run_id
       t.timestamps
     end
 
@@ -132,15 +125,15 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :findings do |t|
-      t.string :name
-      t.string :content
+      t.string        :name
+      t.string        :content
       t.timestamps
     end
 
     create_table :images do |t|
-      t.string :local_path
-      t.string :remote_path
-      t.string :description
+      t.string        :local_path
+      t.string        :remote_path
+      t.string        :description
       t.timestamps
     end
 

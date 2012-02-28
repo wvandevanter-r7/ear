@@ -2,10 +2,12 @@
 class TaskLogger
 
   attr_accessor :name
+  attr_accessor :out
 
   def initialize(name)
     @name = name
-    @out = File.open(File.join(Rails.root,"log","ear.log"), "a")
+    @out = File.open(File.join(Rails.root,"log","tasks.log"), "a")
+    #@out = StringIO.new
   end
 
   def log(message)
@@ -23,14 +25,14 @@ class TaskLogger
 
   def log_error(message)
     _log "[-] #{@name}: " << message
-  end
+  end 
   ######
 
 private 
   def _log(message) 
    puts message
    @out.puts message
-   @out.flush
+   #@out.flush
   end
 
 end

@@ -88,8 +88,6 @@ def run
         # Get Company Profile set this
         description = Nokogiri::XML((doc/"/html/body/div[3]/div[2]/div[7]/p").to_xml).text
 
-        @task_run.save_raw_result doc.to_s
-
       rescue Exception => e
         @task_logger.log_error "Caught Exception: #{e}"
       end

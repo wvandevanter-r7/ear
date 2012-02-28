@@ -40,7 +40,7 @@ def run
     # if this was a host, then we should try to parse out the netrange
 
     # Parse out the netrange
-    create_object NetBlock, {:range => answer.parser }
+    #create_object NetBlock, {:range => answer.parser }
 
     # if it was a domain, we've got a whole lot of other shit to worry about 
     # Create a user from the technical contact
@@ -64,10 +64,18 @@ def run
     # Parse up the contacts
     answer.parser.contacts.each do |contact|
       @task_logger.log "TODO - found contact #{contact}"
-    end
 
-    # Save the raw data
-    @task_run.save_raw_result answer.to_s
+        begin
+          @task_logger.log "Creating user from technical contact"
+          fname,lname = contact.split(" ")
+          create_object(User, {:first_name => fname, :last_name => lname})
+        rescue Exception => e
+          fname = contact
+          create_object(User, {:first_name => fname })
+        end
+
+
+    end
 
   else
     @task_logger.log "Domain WHOIS failed, we don't know what nameserver to query."

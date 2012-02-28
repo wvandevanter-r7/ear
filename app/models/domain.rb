@@ -3,7 +3,6 @@ class Domain < ActiveRecord::Base
   has_many   :hosts
   has_many   :netblocks
   has_many   :task_runs
-  has_many    :task_results, :through => :task_runs
   
   validates_uniqueness_of :name
   validates_presence_of   :name
