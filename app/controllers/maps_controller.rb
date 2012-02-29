@@ -9,12 +9,27 @@ class MapsController < ApplicationController
 
     @loc.each do |loc|
       display  = ""
-      
+
       loc.parents.each do |x|
-        display << "<a href=\"#{request.url}/../../#{x.underscore}s/#{x.id}\">#{x.to_s}</a><br/>"
+        display << "Parent - <a href=\"#{request.url}/../../#{x.underscore}s/#{x.id}\"> #{x.to_s}</a><br/>"
+
+        # Show parents of each host (good for showing hosts created from domains)
+        if x.kind_of? Host
+          x.parents.each do |y|
+            display << "GrandParent - <a href=\"#{request.url}/../../#{y.underscore}s/#{y.id}\"> #{y.to_s}</a><br/>"
+          end
+        end
         
+        # Show each child of the location
         x.children.each do |y|
-            display << "<a href=\"#{request.url}/../../#{y.underscore}s/#{y.id}\">#{y.to_s}</a><br/>"
+          if y == loc
+            string = " Self - <a href=\"#{request.url}/../../#{y.underscore}s/#{y.id}\"> #{y.to_s}</a><br/>" 
+          else
+            string =  " Child - <a href=\"#{request.url}/../../#{y.underscore}s/#{y.id}\"> #{y.to_s}</a><br/>"
+          end
+          
+          display << string
+          
         end
       end
       
