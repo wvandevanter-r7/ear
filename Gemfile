@@ -36,15 +36,14 @@ gem 'flickr'
 # Scraping
 gem 'nokogiri'
 
-# Heavy-duty javascript scraping
-gem 'capybara'
-#gem 'akephalos' # headless scraping with capybara
-gem 'selenium-webdriver' # browser based scraping with capybara
-
-# https://github.com/thoughtbot/capybara-webkit#readme
-# apt-get install libqt4-dev libqtwebkit-dev
- gem 'capybara-webkit' # Requires QTwebkit
-# gem 'headless'
+group :pain do
+  # Heavy-duty javascript scraping
+  gem 'capybara'
+  gem 'selenium-webdriver' # browser based scraping with capybara
+  # https://github.com/thoughtbot/capybara-webkit#readme
+  # apt-get install libqt4-dev libqtwebkit-dev
+  gem 'capybara-webkit' # Requires QTwebkit
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
