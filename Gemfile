@@ -36,10 +36,11 @@ gem 'flickr'
 # Scraping
 gem 'nokogiri'
 
+# Heavy-duty javascript scraping
+gem 'selenium-webdriver' # browser based scraping with capybara
+gem 'capybara'
+
 group :pain do
-  # Heavy-duty javascript scraping
-  gem 'capybara'
-  gem 'selenium-webdriver' # browser based scraping with capybara
   # https://github.com/thoughtbot/capybara-webkit#readme
   # apt-get install libqt4-dev libqtwebkit-dev
   gem 'capybara-webkit' # Requires QTwebkit

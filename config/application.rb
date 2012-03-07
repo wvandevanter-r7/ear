@@ -44,17 +44,5 @@ module Ear
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-		# EAR specific configuration
-		############################			
-		#@root = Rails.root
-
-		# Set up task manager
-		#@task_manager = Ear::TaskManager.instance
-		#@task_manager.setup("#{@root}/lib/ear/tasks")
-		
-		# Set up the object manager
-		#@object_manager = Ear::ObjectManager.instance
-
   end
 end

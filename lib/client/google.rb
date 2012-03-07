@@ -2,7 +2,7 @@ require 'open-uri'
 require 'cgi'
 require "capybara"  
 require "capybara/dsl"  
-require "capybara-webkit"  
+#require "capybara-webkit"  
 
 module Ear
 module Client
@@ -26,7 +26,11 @@ class SearchScraper
     def initialize
       Capybara.run_server = false
       Capybara.default_selector = :xpath
-      Capybara.current_driver = :akephalos
+      Capybara.current_driver = :selenium
+
+      # Uncomment to capybara-webkit scraping
+      # Capybara.current_driver = :webkit
+
       Capybara.app_host = "http://www.google.com/"
     end
     
