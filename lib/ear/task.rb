@@ -183,27 +183,50 @@ class Task
   #
   def execute(object, options={})
     
+    #
+    # Do some logging in the main EAR log
+    # 
     EarLogger.instance.log "Running task: #{self.name}"
     EarLogger.instance.log "Object: #{object}"
     EarLogger.instance.log "Options: #{options}"
 
+    #
+    # Call the methods to actually do something with the objects that have
+    # been passed into this task
+    #
     self.setup(object, options)
     self.run
     self.cleanup 
     
-    # RECORD RESULTS. g.h.e.t.t.o, but hey better than previous attempts
+    #
+    # Record results in the task_run
+    #
     @task_logger.log "Recording results"
     @task_run.task_result_hash = {}
-     @results.each do |result|
+    
+    #
+    # Iterate through results
+    #
+    @results.each do |result|
       @task_run.task_result_hash["#{result.first.class.to_s}_#{result.first.id.to_s}"] = result.last
     end
+    
+    #
+    # Save our task run object
+    #
     @task_run.save
+    
+    #
+    # Mark complete in the task log
+    #
     @task_logger.log "done recording"
     # End recording of results
 
    
-  #return the task run id
-  @task_run
+  #
+  #  Return result - which is an array of the form [[object,true/false], [object, true/false], ... ]
+  #
+  @results
   end
 
 end

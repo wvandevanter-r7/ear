@@ -6,8 +6,8 @@ class TaskLogger
 
   def initialize(name)
     @name = name
-    @out = File.open(File.join(Rails.root,"log","tasks.log"), "a")
-    #@out = StringIO.new
+    #@out = File.open(File.join(Rails.root,"log","tasks.log"), "a")
+    @out = StringIO.new
   end
 
   def log(message)
@@ -27,6 +27,10 @@ class TaskLogger
     _log "[-] #{@name}: " << message
   end 
   ######
+
+  def text
+    @out.string
+  end
 
 private 
   def _log(message) 
